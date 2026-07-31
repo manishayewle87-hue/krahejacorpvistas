@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------
+// CRM: Lead Generation (Captured from landing pages)
+// ----------------------------------------------------
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  phone         String
+  configuration String
+  
+  // Marketing Attribution
+  utmSource     String?
+  utmMedium     String?
+  utmCampaign   String?
+  geoCity       String?
+  
+  createdAt     DateTime @default(now())
+}
+
+// ----------------------------------------------------
+// Post-Sale: Customer Portal Data
+// ----------------------------------------------------
+model Customer {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  phone         String
+  unitNumber    String
+  tower         String
+  
+  payments      Payment[]
+  documents     Document[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  amount        Float
+  status        String    // e.g., "PAID", "PENDING"
+  milestone     String    // e.g., "Plinth", "14th Slab"
+  receiptUrl    String?   // S3 or Vercel Blob URL
+  
+  customerId    String
+  customer      Customer  @relation(fields: [customerId], references: [id])
+
+  createdAt     DateTime  @default(now())
+}
+
+model Document {
+  id            String    @id @default(cuid())
+  title         String    // e.g., "Allotment Letter"
+  fileUrl       String
+  type          String    // e.g., "PDF"
+
+  customerId    String
+  customer      Customer  @relation(fields: [customerId], references: [id])
+
+  createdAt     DateTime  @default(now())
+}
