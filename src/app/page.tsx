@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Hero from '@/components/home/Hero';
 import ProjectHighlights from '@/components/home/ProjectHighlights';
 import Amenities from '@/components/home/Amenities';
+import AeoFaqBlock from '@/components/seo/AeoFaqBlock';
 
 export const metadata: Metadata = {
   title: "Luxury Apartments in Pune | Premium 2, 3 & 4 BHK Deck Residences",
@@ -34,6 +35,7 @@ export default async function Home() {
       <Hero personalizedHeadline={headline} />
       <ProjectHighlights />
       <Amenities />
+      <AeoFaqBlock />
     </>
   );
 }

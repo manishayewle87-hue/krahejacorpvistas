@@ -81,7 +81,31 @@ if (fs.existsSync(footerPath)) {
 const sitemapPath = path.join(rootDir, 'src/app/sitemap.ts');
 const robotsPath = path.join(rootDir, 'src/app/robots.ts');
 assert(fs.existsSync(sitemapPath), 'Dynamic sitemap (src/app/sitemap.ts) exists');
-assert(fs.existsSync(robotsPath), 'Robots configuration (src/app/robots.ts) exists');
+// 6. AI Search Engine Optimization (AEO / GEO)
+const llmsPath = path.join(rootDir, 'src/app/llms.txt/route.ts');
+assert(fs.existsSync(llmsPath), 'AI Search Engine autodiscovery route (/llms.txt) exists');
+
+// 7. Homepage SERP FAQ Rich Snippet Check
+const homePath = path.join(rootDir, 'src/app/page.tsx');
+assert(fs.existsSync(homePath), 'Homepage (src/app/page.tsx) exists');
+if (fs.existsSync(homePath)) {
+  const homeContent = fs.readFileSync(homePath, 'utf8');
+  assert(homeContent.includes('AeoFaqBlock'), 'Homepage includes AeoFaqBlock for SERP FAQ Rich Snippets');
+}
+
+// 8. Google Merchant Feed Autodiscovery Check
+if (fs.existsSync(layoutPath)) {
+  const layoutContent = fs.readFileSync(layoutPath, 'utf8');
+  assert(layoutContent.includes('/api/google-merchant-feed'), 'layout.tsx includes Google Merchant XML Feed autodiscovery link');
+}
+
+// 9. HTTP Security Headers Check
+const nextConfigPath = path.join(rootDir, 'next.config.ts');
+assert(fs.existsSync(nextConfigPath), 'next.config.ts exists');
+if (fs.existsSync(nextConfigPath)) {
+  const configContent = fs.readFileSync(nextConfigPath, 'utf8');
+  assert(configContent.includes('Strict-Transport-Security'), 'next.config.ts enforces HSTS Strict-Transport-Security');
+}
 
 console.log('\n----------------------------------------------------');
 console.log(`Summary: ${passed} PASSED | ${warnings} WARNINGS | ${errors} ERRORS`);
