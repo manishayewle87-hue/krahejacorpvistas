@@ -107,6 +107,10 @@ if (fs.existsSync(nextConfigPath)) {
   assert(configContent.includes('Strict-Transport-Security'), 'next.config.ts enforces HSTS Strict-Transport-Security');
 }
 
+// 10. IndexNow Domain Verification Key Check
+const indexNowPath = path.join(rootDir, 'public/default-indexnow-key.txt');
+assert(fs.existsSync(indexNowPath), 'IndexNow domain verification key file (public/default-indexnow-key.txt) exists');
+
 console.log('\n----------------------------------------------------');
 console.log(`Summary: ${passed} PASSED | ${warnings} WARNINGS | ${errors} ERRORS`);
 console.log('----------------------------------------------------\n');
