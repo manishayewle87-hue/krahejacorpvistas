@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 const locationHighlights = [
   { name: 'Hinjewadi IT Park', distance: 'Approx 1.5 km (5 mins drive)' },
@@ -12,8 +11,43 @@ const locationHighlights = [
 ];
 
 export default function LocationPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ApartmentComplex",
+    "name": "K Raheja Vistas Mahalunge",
+    "description": "Ultra-luxury deck residences and apartments located at Baner Annexe, Mahalunge, West Pune.",
+    "url": "https://krahejavistasmahalunge.com/project/location",
+    "hasMap": "https://www.google.com/maps?cid=0xc3b8a1c865fcd5d0",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "18.5678443",
+      "longitude": "73.7380126"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "K Raheja Vistas, Mahalunge",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "postalCode": "411045",
+      "addressCountry": "IN"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Pune" },
+      { "@type": "Place", "name": "Mahalunge" },
+      { "@type": "Place", "name": "Baner Annexe" },
+      { "@type": "Place", "name": "Hinjewadi IT Park" },
+      { "@type": "Place", "name": "Balewadi High Street" },
+      { "@type": "Place", "name": "Wakad" }
+    ]
+  };
+
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen">
+      <script
+        id="location-apartmentcomplex-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <section className="pt-40 pb-20 px-6 text-center">
         <motion.span 
@@ -83,14 +117,18 @@ export default function LocationPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px] md:h-[700px]"
+                className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px] md:h-[700px] bg-gray-900 border border-gray-200"
               >
-                <Image 
-                  src="/assets/map.jpg" 
-                  alt="Connectivity Map Mahalunge" 
-                  fill
-                  className="object-cover"
-                />
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15128.530737402927!2d73.7380126!3d18.5678443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec704383a15%3A0xc3b8a1c865fcd5d0!2sMahalunge%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="K Raheja Vistas Mahalunge Pune Interactive Google Maps Location"
+                ></iframe>
               </motion.div>
             </div>
 
