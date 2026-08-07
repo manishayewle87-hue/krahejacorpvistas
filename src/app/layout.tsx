@@ -97,20 +97,11 @@ const jsonLd = {
     "capital appreciation Baner",
     "rental yields Hinjewadi"
   ],
-  "sameAs": [
-    "https://www.linkedin.com/company/k-raheja-corp",
-    "https://www.facebook.com/KRahejaCorp",
-    "https://twitter.com/krahejacorp",
-    "https://www.instagram.com/krahejacorp",
-    "https://www.youtube.com/@krahejacorp",
-    "https://en.wikipedia.org/wiki/K_Raheja_Corp",
-    "https://www.wikidata.org/wiki/K_Raheja_Corp"
-  ],
   "parentOrganization": {
     "@type": "Organization",
     "name": "K Raheja Corp",
-    "url": "https://www.krahejacorp.com",
-    "logo": "https://www.krahejacorp.com/logo.png",
+    "url": "https://www.krahejacorpvistas.com",
+    "logo": "https://www.krahejacorpvistas.com/assets/logo.png",
     "description": "K Raheja Corp is a leading real estate developer in India, known for premium luxury and commercial developments with decades of proven expertise."
   },
   "author": {

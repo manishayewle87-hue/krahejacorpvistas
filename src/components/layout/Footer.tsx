@@ -49,7 +49,7 @@ export default function Footer() {
               <ul className="space-y-4 text-sm text-gray-400">
                 <li>Site Address: K Raheja Vistas, Mahalunge, Pune, Maharashtra 411045</li>
                 <li>Phone: +91 98765 43210</li>
-                <li>Email: sales@krahejavistas-mahalunge.com</li>
+                <li>Email: sales@krahejacorpvistas.com</li>
               </ul>
             </div>
 
