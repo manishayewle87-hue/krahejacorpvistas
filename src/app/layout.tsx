@@ -8,6 +8,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import AiChatWidget from "@/components/ui/AiChatWidget";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -256,6 +257,7 @@ export default function RootLayout({
           <AiChatWidget />
           <WhatsAppButton />
           <Footer />
+          <CookieConsent />
         </SmoothScroll>
       </body>
     </html>

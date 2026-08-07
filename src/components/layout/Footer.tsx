@@ -55,6 +55,10 @@ export default function Footer() {
 
           </div>
           
+          <div className="pt-8 mb-8 border-t border-white/10 text-[10px] text-gray-500 leading-relaxed text-justify">
+            <strong className="text-gray-400">Disclaimer:</strong> The information provided on this website is for informational purposes only and does not constitute an offer, invitation, or contract. The visuals, master plans, floor plans, specifications, amenities, and facilities described herein are conceptual and subject to change at the sole discretion of K Raheja Corp and the competent authorities. We have officially registered K Raheja Vistas Mahalunge under MahaRERA No. PR1260002501530 and is available on the website maharera.mahaonline.gov.in under registered projects. By accessing this website, the viewer confirms that the information, including brochures and marketing collaterals, is solely for informational purposes and that they have not relied on this information for making any booking or purchase. Nothing on this website constitutes advertising, marketing, booking, selling or an offer for sale, or invitation to purchase a unit in any project by the company.
+          </div>
+          
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
             <p>&copy; {new Date().getFullYear()} K Raheja Vistas Mahalunge. All Rights Reserved.</p>
             <div className="flex gap-4 mt-4 md:mt-0">
