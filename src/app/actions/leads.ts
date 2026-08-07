@@ -41,7 +41,6 @@ export async function submitLead(data: {
       geoCity: city,
     });
 
-    console.log(`[CRM] New Lead Captured: ${lead.name} from ${city}`);
     return { success: true, leadId: lead.id };
   } catch (error) {
     console.error('[CRM Error] Failed to submit lead:', error);

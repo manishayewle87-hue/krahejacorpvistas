@@ -19,7 +19,7 @@ interface LeadEmailData {
 
 async function sendEmail(to: string, subject: string, html: string) {
   if (!RESEND_API_KEY) {
-    console.log('[Email] RESEND_API_KEY not set. Skipping email send.');
+    // Silent skip in production to avoid leaking structure
     return;
   }
   
@@ -35,8 +35,6 @@ async function sendEmail(to: string, subject: string, html: string) {
     
     if (!response.ok) {
       console.error('[Email Error]', await response.text());
-    } else {
-      console.log(`[Email] Sent "${subject}" to ${to}`);
     }
   } catch (error) {
     console.error('[Email Error]', error);

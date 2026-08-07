@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     description: "Ultra-luxury 2 & 3 BHK premium deck residences at Baner Annex.",
     images: ["/assets/banner.jpg"],
   },
+  verification: {
+    google: "YOUR_GSC_VERIFICATION_STRING",
+  },
 };
 
 export const viewport = {
