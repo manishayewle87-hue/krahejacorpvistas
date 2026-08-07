@@ -78,7 +78,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[var(--color-luxury-charcoal)] border-t border-white/10"
+            className="md:hidden bg-[var(--color-luxury-charcoal)] border-t border-white/10 max-h-[85vh] overflow-y-auto"
           >
             <nav className="flex flex-col px-6 py-8 gap-6">
               {[
