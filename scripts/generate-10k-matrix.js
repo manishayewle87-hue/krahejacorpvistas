@@ -9,16 +9,16 @@ try {
   console.log("Starting fresh database.");
 }
 
-const intents = ["buy", "invest-in", "luxury", "premium", "best", "top", "new-launch", "ready-possession", "spacious", "exclusive"];
-const properties = ["2-bhk", "3-bhk", "4-bhk", "deck-residences", "apartments", "flats", "homes", "penthouses", "duplex", "sky-villas"];
-const locations = ["mahalunge", "baner-annexe", "hinjewadi-it-park", "balewadi-high-street", "wakad", "pashan", "pune-west", "mumbai-pune-expressway", "aundh", "sus"];
-const amenities = ["with-clubhouse", "near-metro-station", "with-infinity-pool", "with-open-space", "gated-community", "smart-homes", "near-highway", "with-gym", "with-tennis-court", "with-park-view"];
+const intents = ["buy", "invest-in", "luxury", "premium", "best", "top", "new-launch", "ready-possession", "spacious", "exclusive", "buy-direct", "nri-investment", "zero-brokerage", "under-construction", "high-roi"];
+const properties = ["2-bhk", "3-bhk", "4-bhk", "deck-residences", "apartments", "flats", "homes", "penthouses", "duplex", "sky-villas", "villas", "condos"];
+const locations = ["mahalunge", "baner-annexe", "hinjewadi-it-park", "balewadi-high-street", "wakad", "pashan", "pune-west", "mumbai-pune-expressway", "aundh", "sus", "pimple-saudagar", "kothrud", "bavdhan", "viman-nagar", "kharadi", "kalyani-nagar", "koregaon-park", "nibm", "undri", "hinjewadi-phase-1", "hinjewadi-phase-2", "hinjewadi-phase-3", "ravet", "tathawade", "baner"];
+const amenities = ["with-clubhouse", "near-metro-station", "with-infinity-pool", "with-open-space", "gated-community", "smart-homes", "near-highway", "with-gym", "with-tennis-court", "with-park-view", "with-security", "with-parking"];
 
 const categories = ['configurations', 'location', 'lifestyle', 'investment'];
 
 let count = 0;
 
-console.log("Generating 10,000 unique SEO pages...");
+console.log("Generating 54,000 unique SEO pages...");
 
 for (let i of intents) {
   for (let p of properties) {
