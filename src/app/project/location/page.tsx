@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { motion } from 'framer-motion';
 
@@ -11,6 +12,12 @@ const locationHighlights = [
 ];
 
 export default function LocationPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Prime Location", href: "/project/location" }
+  ];
+
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ApartmentComplex",
@@ -78,6 +85,8 @@ export default function LocationPage() {
       {/* Connectivity Grid */}
       <section className="py-20 px-6">
         <div className="container mx-auto">
+        <Breadcrumbs items={breadcrumbs} />
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             <div className="lg:col-span-5 z-10">

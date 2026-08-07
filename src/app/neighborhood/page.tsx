@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { motion } from 'framer-motion';
 import { MapPin, Train, BookOpen, HeartPulse, Building2, Car } from 'lucide-react';
@@ -13,9 +14,17 @@ const locations = [
 ];
 
 export default function NeighborhoodPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Neighborhood", href: "/neighborhood" }
+  ];
+
+
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen pt-40 pb-20 px-6">
       <div className="container mx-auto">
+        <Breadcrumbs items={breadcrumbs} />
+
         
         {/* Header Section */}
         <section className="text-center mb-24 max-w-4xl mx-auto">

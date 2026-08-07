@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 
 export const metadata = {
@@ -6,9 +7,17 @@ export const metadata = {
 };
 
 export default function GalleryPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Project Gallery", href: "/project/gallery" }
+  ];
+
+
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen pt-40 pb-20 px-6">
       <div className="container mx-auto">
+        <Breadcrumbs items={breadcrumbs} />
+
         <section className="text-center mb-20 max-w-3xl mx-auto">
           <span className="text-[var(--color-luxury-gold)] tracking-[0.3em] uppercase text-sm font-semibold mb-6 block">
             Visual Experience

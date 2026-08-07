@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,6 +36,12 @@ const floorplanSchema = {
 };
 
 export default function FloorPlansPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Luxury Floor Plans", href: "/project/floorplans" }
+  ];
+
+
   const [activeFilter, setActiveFilter] = useState('all');
 
   const filteredPlans = floorPlans.filter(plan => activeFilter === 'all' || plan.type === activeFilter);
@@ -96,6 +103,8 @@ export default function FloorPlansPage() {
 
         {/* Layout Grid */}
         <div className="container mx-auto">
+        <Breadcrumbs items={breadcrumbs} />
+
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <AnimatePresence>
               {filteredPlans.map((plan) => (

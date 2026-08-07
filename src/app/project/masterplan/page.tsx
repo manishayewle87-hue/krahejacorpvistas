@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -28,6 +29,12 @@ const zones = [
 ];
 
 export default function MasterPlanPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Master Plan", href: "/project/masterplan" }
+  ];
+
+
   const [activeZone, setActiveZone] = useState<string | null>(null);
 
   const activeZoneData = zones.find(z => z.id === activeZone);
@@ -64,6 +71,8 @@ export default function MasterPlanPage() {
       {/* Interactive Map */}
       <section className="py-10 px-6 mb-20">
         <div className="container mx-auto max-w-5xl relative">
+        <Breadcrumbs items={breadcrumbs} />
+
           <Masterplan3D />
         </div>
       </section>

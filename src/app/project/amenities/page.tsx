@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { motion } from 'framer-motion';
 import { Activity, Sunrise, Footprints, Trophy, Waves, Users } from 'lucide-react';
@@ -23,6 +24,12 @@ const amenities = [
 ];
 
 export default function AmenitiesPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "World-Class Amenities", href: "/project/amenities" }
+  ];
+
+
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen">
       <section className="pt-40 pb-20 px-6 text-center">
@@ -53,6 +60,8 @@ export default function AmenitiesPage() {
 
       <section className="py-20 px-6">
         <div className="container mx-auto">
+        <Breadcrumbs items={breadcrumbs} />
+
           {amenities.map((category, catIndex) => (
             <div key={category.category} className="mb-24">
               <motion.h3 

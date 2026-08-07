@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -78,12 +79,20 @@ const faqSchema = {
 };
 
 export default function InsightsPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Market Insights", href: "/insights" }
+  ];
+
+
   return (
     <div className="min-h-screen bg-[var(--color-luxury-charcoal)] pt-32 pb-20 px-6">
       <script id="insights-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(insightsSchema) }} />
       <script id="insights-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <div className="container mx-auto max-w-6xl">
+        <Breadcrumbs items={breadcrumbs} />
+
         {/* Header */}
         <div className="text-center mb-20">
           <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs font-semibold block mb-4">Research & Intelligence</span>
