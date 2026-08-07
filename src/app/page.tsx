@@ -6,11 +6,13 @@ import Amenities from '@/components/home/Amenities';
 import AeoFaqBlock from '@/components/seo/AeoFaqBlock';
 
 export const metadata: Metadata = {
-  title: "Luxury Apartments in Pune | Premium 2, 3 & 4 BHK Deck Residences",
+  title: "K Raheja Vistas Mahalunge | Luxury 2, 3 & 4 BHK Flats in Pune",
   description: "Experience ultra-luxury deck residences at K Raheja Vistas in Baner Annexe, Mahalunge. 7.5 acres of premium living with unparalleled connectivity in West Pune.",
   keywords: [
-    "Luxury Apartments Pune", "Premium Deck Residences Mahalunge", "2 BHK Baner Annexe", 
-    "3 BHK Baner Annexe", "Hinjewadi IT Park real estate"
+    "K Raheja Vistas Mahalunge", "K Raheja Vistas Pune", "Luxury Apartments Pune", 
+    "Premium Deck Residences Mahalunge", "2 BHK Flats Baner Annexe", 
+    "3 BHK Flats Baner Annexe", "4 BHK Duplex Pune", "Hinjewadi IT Park real estate", 
+    "New Launch Projects Pune West", "Ready Possession Flats Mahalunge"
   ],
   alternates: {
     canonical: 'https://krahejavistasmahalunge.com/',
