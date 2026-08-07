@@ -12,7 +12,11 @@ const formSchema = z.object({
   utmCampaign: z.string().optional(),
 });
 
-export async function submitLead(prevState: any, formData: FormData) {
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function submitLead(prevState: unknown, formData: FormData) {
   try {
     const rawData = {
       name: formData.get('name'),
@@ -27,26 +31,25 @@ export async function submitLead(prevState: any, formData: FormData) {
     // Validate data using Zod
     const validatedData = formSchema.parse(rawData);
 
-    // MOCK: Simulate saving to CRM / Database (e.g., Salesforce, Hubspot)
-    console.log('--- ENRICHED ENTERPRISE LEAD RECEIVED ---');
-    console.log(`Lead Name: ${validatedData.name}`);
-    console.log(`Contact: ${validatedData.phone} | ${validatedData.email}`);
-    console.log(`Interested In: ${validatedData.configuration}`);
-    if (validatedData.utmSource) {
-      console.log(`[ATTRIBUTION] Source: ${validatedData.utmSource} | Medium: ${validatedData.utmMedium} | Campaign: ${validatedData.utmCampaign}`);
-    } else {
-      console.log('[ATTRIBUTION] Organic/Direct');
-    }
-    console.log('--- POSTING TO SALESFORCE API (Simulated) ---');
-    
-    // Simulate network latency for CRM
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'Leads <onboarding@resend.dev>',
+      to: 'propsmartrealty@gmail.com',
+      subject: `New Lead: ${validatedData.name} - K Raheja Vistas Mahalunge`,
+      text: `
+--- NEW ENQUIRY LEAD ---
 
-    // Phase 9.3: Automated Omnichannel Follow-ups (WhatsApp)
-    console.log(`--- TRIGGERING WHATSAPP API (Simulated) ---`);
-    console.log(`To: +91${validatedData.phone}`);
-    console.log(`Message: "Hi ${validatedData.name}, thank you for your interest in K Raheja Vistas Mahalunge. Here is your requested brochure: https://www.krahejacorpvistas.com/brochure.pdf. A luxury consultant will call you shortly."`);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+Name: ${validatedData.name}
+Phone: ${validatedData.phone}
+Email: ${validatedData.email}
+Configuration: ${validatedData.configuration}
+
+--- ATTRIBUTION ---
+Source: ${validatedData.utmSource || 'Organic/Direct'}
+Medium: ${validatedData.utmMedium || 'N/A'}
+Campaign: ${validatedData.utmCampaign || 'N/A'}
+      `,
+    });
 
     return { success: true, message: 'Thank you for your interest. A luxury consultant will contact you shortly.' };
   } catch (error) {
