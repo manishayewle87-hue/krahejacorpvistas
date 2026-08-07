@@ -42,14 +42,14 @@ export default async function DirectoryGroupPage(props: Props) {
     notFound();
   }
 
-  // Filter links for this group
+  // Filter links for this group and strictly cap at 3000 to prevent Vercel ISR limit crashes
   const allKeys = Object.keys(db);
   const links = allKeys.filter((key) => {
     if (group === '0-9') {
       return /^[0-9]/.test(key);
     }
     return key.startsWith(group);
-  });
+  }).slice(0, 3000);
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
