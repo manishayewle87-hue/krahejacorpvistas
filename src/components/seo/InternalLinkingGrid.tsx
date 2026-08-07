@@ -36,7 +36,7 @@ export default function InternalLinkingGrid({ currentSlug }: { currentSlug: stri
   const selectedSlugs = siloSlugs.slice(startIndex, startIndex + 11);
 
   // Enforce Pillar Page at the very top of the internal links for PageRank consolidation
-  if (pillarSlug && pillarSlug !== currentSlug) {
+  if (pillarSlug && pillarSlug !== currentSlug && db[pillarSlug]) {
     selectedSlugs.unshift(pillarSlug);
   }
 
@@ -47,6 +47,7 @@ export default function InternalLinkingGrid({ currentSlug }: { currentSlug: stri
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8">
         {selectedSlugs.map((slug, index) => {
+          if (!db[slug]) return null;
           const isPillar = slug === pillarSlug;
           return (
             <Link 

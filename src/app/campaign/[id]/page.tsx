@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Suspense } from 'react';
 import ContactForm from '@/components/ui/ContactFormInline'; // I will create an inline version of the form
 
 export default function CampaignPage({ params }: { params: { id: string } }) {
@@ -54,7 +55,9 @@ export default function CampaignPage({ params }: { params: { id: string } }) {
             <h3 className="text-2xl font-serif text-[var(--color-luxury-charcoal)] mb-2">Download Brochure & Pricing</h3>
             <p className="text-sm text-gray-500">Register to instantly receive floor plans, RERA details, and launch offers.</p>
           </div>
-          <ContactForm />
+          <Suspense fallback={<div className="h-40 w-full animate-pulse bg-gray-200 rounded"></div>}>
+            <ContactForm />
+          </Suspense>
         </div>
       </div>
 

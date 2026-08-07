@@ -37,7 +37,7 @@ export default async function Home() {
       <Hero personalizedHeadline={headline} />
       <ProjectHighlights />
       <Amenities />
-      <AeoFaqBlock />
+      <AeoFaqBlock keyword="K Raheja Vistas Mahalunge" />
     </>
   );
 }

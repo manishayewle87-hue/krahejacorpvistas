@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -114,7 +114,9 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      <ContactModal isOpen={contactModalOpen} onClose={() => setContactModalOpen(false)} />
+      <Suspense fallback={null}>
+        <ContactModal isOpen={contactModalOpen} onClose={() => setContactModalOpen(false)} />
+      </Suspense>
     </header>
   );
 }

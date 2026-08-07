@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Suspense } from 'react';
 import ContactForm from '@/components/ui/ContactFormInline';
 
 const dictionaries = {
@@ -49,7 +50,9 @@ export default function LocalizedLandingPage({ params }: { params: { lang: 'en' 
       <div className="w-full md:w-1/2 bg-[var(--color-luxury-pearl)] h-auto md:h-screen flex items-center justify-center p-8 md:p-16">
         <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
           <h3 className="text-2xl font-serif text-[var(--color-luxury-charcoal)] mb-6 text-center">{dict.formTitle}</h3>
-          <ContactForm />
+          <Suspense fallback={<div className="h-40 w-full animate-pulse bg-gray-200 rounded"></div>}>
+            <ContactForm />
+          </Suspense>
         </div>
       </div>
     </div>
