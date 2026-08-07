@@ -49,10 +49,10 @@ export default function Amenities() {
   const x = useTransform(scrollYProgress, [0.2, 0.8], ['10%', '-50%']);
 
   return (
-    <section className="bg-black py-32 overflow-hidden border-t border-white/5">
+    <section className="bg-black py-20 border-t border-white/5 relative">
       {/* Amenities Horizontal Scroll */}
       <div ref={targetRef} className="h-[200vh] relative">
-        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden pt-24">
           <div className="container mx-auto px-6 mb-12">
              <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs md:text-sm font-semibold mb-4 block">
               Curated Lifestyle
@@ -85,7 +85,7 @@ export default function Amenities() {
       </div>
 
       {/* Specifications Grid */}
-      <div className="container mx-auto px-6 pt-32 mt-32 border-t border-white/10">
+      <div className="container mx-auto px-6 pt-16 mt-16 border-t border-white/10 relative z-10">
         <div className="text-center mb-20">
           <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs md:text-sm font-semibold mb-4 block">
             The Finer Details

@@ -213,7 +213,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://app.posthog.com" />
         <link rel="alternate" type="application/rss+xml" title="K Raheja Vistas - Google Shopping & Merchant Feed" href="https://krahejavistasmahalunge.com/api/google-merchant-feed" />
       </head>
-      <body className="min-h-full flex flex-col selection:bg-[var(--color-luxury-gold)] selection:text-white font-sans">
+      <body className="min-h-full flex flex-col selection:bg-[var(--color-luxury-gold)] selection:text-white font-sans overflow-x-hidden">
         <script
           id="json-ld"
           type="application/ld+json"

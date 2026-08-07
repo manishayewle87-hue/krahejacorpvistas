@@ -21,7 +21,7 @@ export default function ProjectHighlights() {
   const imgY = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
   return (
-    <section ref={containerRef} className="py-40 bg-[var(--color-luxury-charcoal)] text-[var(--color-luxury-pearl)] relative overflow-hidden">
+    <section ref={containerRef} className="py-24 md:py-40 bg-[var(--color-luxury-charcoal)] text-[var(--color-luxury-pearl)] relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--color-luxury-gold)]/50 to-transparent opacity-50" />
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
