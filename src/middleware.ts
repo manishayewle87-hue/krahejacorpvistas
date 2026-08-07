@@ -9,12 +9,12 @@ export function middleware(request: NextRequest) {
   const userAgent = request.headers.get('user-agent') || '';
 
   // Edge Anti-Scraping Defense (Hardening)
-  // Block known aggressive SEO scrapers from stealing programmatic content, while allowing Googlebot
+  // Block known aggressive SEO scrapers and empty User-Agents from stealing programmatic content, while allowing Googlebot
   const blockedBots = ['AhrefsBot', 'SemrushBot', 'MJ12bot', 'DotBot', 'PetalBot', 'Baiduspider', 'YandexBot'];
   const isBlocked = blockedBots.some(bot => userAgent.includes(bot));
   
-  if (isBlocked) {
-    return new NextResponse('Access Denied: Scraper Bot Detected', { status: 403 });
+  if (isBlocked || !userAgent || userAgent.trim() === '') {
+    return new NextResponse('Access Denied: Scraper Bot Detected or Invalid User-Agent', { status: 403 });
   }
 
   // Edge Personalization (Phase 8.3)
