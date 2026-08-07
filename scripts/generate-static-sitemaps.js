@@ -19,6 +19,7 @@ function main() {
   const db = JSON.parse(rawData);
   const dynamicSlugs = Object.keys(db);
   
+  
   const totalSitemaps = Math.ceil(dynamicSlugs.length / URLS_PER_SITEMAP);
   let sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
@@ -33,8 +34,19 @@ function main() {
     '/updates', 
     '/project/location',
     '/project/masterplan',
-    '/project/amenities'
+    '/project/amenities',
+    '/insights',
+    '/stories',
+    '/directory',
+    '/nri/invest-in-pune-real-estate-from-dubai',
+    '/nri/luxury-homes-pune-for-nri-uk',
+    '/nri/best-nri-investment-pune-singapore',
+    '/nri/pune-real-estate-investment-for-nri-usa'
   ];
+
+  // Add a-z and 0-9 directory paths
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('');
+  chars.forEach(char => coreRoutes.push('/directory/' + char));
 
   for (let i = 0; i < totalSitemaps; i++) {
     const start = i * URLS_PER_SITEMAP;

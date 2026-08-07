@@ -11,20 +11,12 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.krahejacorpvistas.com/"
-      },
-      ...items.map((item, index) => ({
-        "@type": "ListItem",
-        "position": index + 2,
-        "name": item.label,
-        "item": `https://www.krahejacorpvistas.com${item.href}`
-      }))
-    ]
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.label,
+      "item": item.href === '/' ? "https://www.krahejacorpvistas.com/" : `https://www.krahejacorpvistas.com${item.href}`
+    }))
   };
 
   return (

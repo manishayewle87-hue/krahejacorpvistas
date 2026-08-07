@@ -129,7 +129,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Compare', href: '#' },
+    { label: 'Compare', href: '/compare/best-projects-in-mahalunge' },
     { label: data.h1.split('—')[0].trim(), href: `/compare/${slug}` }
   ];
 

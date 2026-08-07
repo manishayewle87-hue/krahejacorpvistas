@@ -72,9 +72,17 @@ export default async function ProgrammaticLandingPage(props: Props) {
   }
   
   const isArticle = data.category === 'blog';
+  const pillarMap: Record<string, string> = {
+    'location': '/location/baner-annexe-pune',
+    'configurations': '/configurations/luxury-apartments-mahalunge',
+    'lifestyle': '/lifestyle/ultra-luxury-living-pune',
+    'investment': '/investment/real-estate-investment-baner-annexe',
+    'compare': '/compare/best-projects-in-mahalunge'
+  };
+
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: data.category.replace('_', ' '), href: '#' },
+    { label: data.category.replace('_', ' '), href: pillarMap[data.category] || '/directory' },
     { label: data.h1, href: `/${slugKey}` }
   ];
 
