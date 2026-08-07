@@ -57,9 +57,9 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} K Raheja Vistas Mahalunge. All Rights Reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link href="/directory" className="hover:text-white">Real Estate Directory</Link>
-            <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white">Terms of Service</Link>
-            <Link href="/rera" className="hover:text-white">RERA Information</Link>
+            <Link href="/privacy-policy" className="hover:text-white" rel="nofollow">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white" rel="nofollow">Terms of Service</Link>
+            <Link href="/rera" className="hover:text-white" rel="nofollow">RERA Information</Link>
           </div>
         </div>
       </div>
