@@ -34,9 +34,16 @@ for (let i of intents) {
         if (!db[fullPath]) {
           const formattedTitle = rawSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
           
+          let title = `${formattedTitle} | K Raheja`;
+          if (title.length > 60) title = formattedTitle;
+          if (title.length > 60) title = title.substring(0, 57).trim() + '...';
+
+          let description = `Looking for ${formattedTitle.toLowerCase()}? Discover ultra-premium residences at K Raheja Vistas Mahalunge.`;
+          if (description.length > 155) description = description.substring(0, 152).trim() + '...';
+
           db[fullPath] = {
-            title: `${formattedTitle} | K Raheja Vistas Mahalunge`,
-            description: `Looking for ${formattedTitle.toLowerCase()}? Discover ultra-premium residences at K Raheja Vistas Mahalunge, offering seamless connectivity and world-class amenities.`,
+            title: title,
+            description: description,
             h1: formattedTitle,
             category: category,
             slug: fullPath,

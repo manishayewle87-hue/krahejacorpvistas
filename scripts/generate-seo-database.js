@@ -12,12 +12,23 @@ function slugify(text) {
 
 const database = {};
 
+function truncate(str, maxLen) {
+  if (str.length <= maxLen) return str;
+  return str.substring(0, maxLen - 3).trim() + '...';
+}
+
 function addEntry(keyword, category, customDescription = null, customContent = null) {
   const slug = slugify(keyword);
-  let description = customDescription || `Discover premium ${keyword}. K Raheja Vistas Mahalunge offers unparalleled luxury and seamless connectivity in West Pune.`;
+  
+  let title = `${keyword} | K Raheja Vistas`;
+  if (title.length > 60) title = keyword;
+  title = truncate(title, 60);
+
+  let description = customDescription || `Discover premium ${keyword}. K Raheja Vistas offers unparalleled luxury in Pune.`;
+  description = truncate(description, 155);
   
   database[slug] = {
-    title: `${keyword} | K Raheja Vistas Mahalunge`,
+    title: title,
     description: description,
     h1: keyword,
     category: category,

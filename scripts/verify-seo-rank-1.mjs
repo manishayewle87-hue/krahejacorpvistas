@@ -35,16 +35,18 @@ assert(fs.existsSync(seoDbPath), 'seo-database.json exists in src/data/');
 if (fs.existsSync(seoDbPath)) {
   const data = JSON.parse(fs.readFileSync(seoDbPath, 'utf8'));
   const keys = Object.keys(data);
-  assert(keys.length > 0, `seo-database.json contains programmatic routes (${keys.length} routes detected)`);
+  const totalRoutes = keys.length;
+  assert(totalRoutes > 0, `seo-database.json contains programmatic routes (${totalRoutes} routes detected)`);
   
   let validTitles = 0;
   let validDescs = 0;
-  for (const [_, entry] of Object.entries(data)) {
-    if (entry.title && entry.title.length > 0 && entry.title.length <= 110) validTitles++;
-    if (entry.description && entry.description.length > 0 && entry.description.length <= 300) validDescs++;
-  }
-  assert(validTitles === keys.length, `All ${keys.length} programmatic routes have valid SEO title lengths`);
-  assert(validDescs === keys.length, `All ${keys.length} programmatic routes have valid SEO description lengths`);
+  Object.values(data).forEach(entry => {
+    if (entry.title && entry.title.length > 0 && entry.title.length <= 65) validTitles++;
+    if (entry.description && entry.description.length > 0 && entry.description.length <= 160) validDescs++;
+  });
+  
+  assert(validTitles === totalRoutes, `All ${totalRoutes} programmatic routes have valid SEO title lengths (<= 65 chars)`);
+  assert(validDescs === totalRoutes, `All ${totalRoutes} programmatic routes have valid SEO description lengths (<= 160 chars)`);
 }
 
 // 2. E-E-A-T & Speakable Schema Check in layout.tsx

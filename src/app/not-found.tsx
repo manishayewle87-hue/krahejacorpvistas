@@ -4,6 +4,7 @@ import { Compass } from 'lucide-react';
 
 export default function NotFound() {
   const pillars = [
+    { title: "Property Directory Silo", href: "/directory" },
     { title: "Location & Connectivity", href: "/location/baner-annexe-pune" },
     { title: "Luxury Configurations", href: "/configurations/luxury-apartments-mahalunge" },
     { title: "Curated Lifestyle", href: "/lifestyle/ultra-luxury-living-pune" },
