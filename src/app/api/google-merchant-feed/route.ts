@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+
 
 export const runtime = 'edge';
 
@@ -91,7 +91,7 @@ const INVENTORY = [
   }
 ];
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const xmlItems = INVENTORY.map(item => `
     <item>
       <g:id>${item.id}</g:id>

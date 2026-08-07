@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import Link from 'next/link';
+
 import MagneticButton from '@/components/ui/MagneticButton';
 import ContactModal from '@/components/ui/ContactModal';
 import Image from 'next/image';

@@ -1,12 +1,20 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
+interface TowerProps {
+  position: [number, number, number];
+  scale: [number, number, number];
+  name: string;
+  onHover: (name: string | null) => void;
+  color?: string;
+}
+
 // Represents a single residential tower
-function Tower({ position, scale, name, onHover, color = '#e5e7eb' }: any) {
+function Tower({ position, scale, name, onHover, color = '#e5e7eb' }: TowerProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHover] = useState(false);
 
@@ -21,7 +29,7 @@ function Tower({ position, scale, name, onHover, color = '#e5e7eb' }: any) {
           setHover(true);
           onHover(name);
         }}
-        onPointerOut={(e) => {
+        onPointerOut={() => {
           setHover(false);
           onHover(null);
         }}

@@ -46,7 +46,7 @@ export default function InternalLinkingGrid({ currentSlug }: { currentSlug: stri
         Explore More in {currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8">
-        {selectedSlugs.map((slug, index) => {
+        {selectedSlugs.map((slug) => {
           if (!db[slug]) return null;
           const isPillar = slug === pillarSlug;
           return (

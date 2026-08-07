@@ -1,10 +1,9 @@
 import { Users, Target, Building2, Upload, AlertCircle } from 'lucide-react';
-import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
-  let liveLeads: any[] = [];
+  let liveLeads: unknown[] = [];
   let dbError = false;
 
   try {
@@ -123,7 +122,7 @@ export default async function AdminDashboard() {
               <Building2 className="text-[var(--color-luxury-gold)]" />
               <h2 className="text-xl font-serif text-[var(--color-luxury-pearl)]">Portal Manager</h2>
             </div>
-            <p className="text-sm text-white/60 mb-6">Push construction updates to buyers' post-sale portals.</p>
+            <p className="text-sm text-white/60 mb-6">Push construction updates to buyers&apos; post-sale portals.</p>
             
             <div className="space-y-4 flex-1">
               <div>

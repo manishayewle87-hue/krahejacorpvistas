@@ -1,43 +1,15 @@
 'use client';
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Masterplan3D from '@/components/ui/Masterplan3D';
 
-const zones = [
-  {
-    id: 'tower-a',
-    points: '15,20 30,20 30,45 15,45',
-    title: 'Tower A: The Crown',
-    desc: 'Ultra-luxury 4BHK Duplexes with sweeping views of the Baner Annex skyline.',
-  },
-  {
-    id: 'courtyard',
-    points: '35,35 65,35 65,70 35,70',
-    title: '2.65-Acre Central Courtyard',
-    desc: 'A massive, vehicular-free green lung featuring tropical landscaping and reflexology paths.',
-  },
-  {
-    id: 'clubhouse',
-    points: '70,50 85,50 85,80 70,80',
-    title: 'The Grand Clubhouse',
-    desc: 'A multi-level recreational hub with an infinity pool, fully equipped gymnasium, and alfresco lounge.',
-  }
-];
+
 
 export default function MasterPlanPage() {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Master Plan", href: "/project/masterplan" }
   ];
-
-
-  const [activeZone, setActiveZone] = useState<string | null>(null);
-
-  const activeZoneData = zones.find(z => z.id === activeZone);
 
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen">

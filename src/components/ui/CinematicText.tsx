@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 
 interface CinematicTextProps {
   text: string;
@@ -32,7 +32,7 @@ export default function CinematicText({ text, className = '' }: CinematicTextPro
   );
 }
 
-function Word({ word, progress, start, end }: { word: string, progress: any, start: number, end: number }) {
+function Word({ word, progress, start, end }: { word: string, progress: MotionValue<number>, start: number, end: number }) {
   const opacity = useTransform(progress, [start, end], [0.35, 1]);
   return (
     <span className="relative mr-2 mt-2">

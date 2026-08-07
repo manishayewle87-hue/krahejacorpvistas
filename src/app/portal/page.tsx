@@ -1,4 +1,4 @@
-import { FileText, Building2, Receipt, Calendar } from 'lucide-react';
+import { FileText, Building2, Receipt } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CustomerPortal() {

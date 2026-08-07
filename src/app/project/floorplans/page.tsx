@@ -3,7 +3,6 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BedDouble, Bath, Maximize } from 'lucide-react';
 import EmiCalculator from '@/components/ui/EmiCalculator';
 import Image from 'next/image';
 

@@ -62,7 +62,7 @@ export default function AmenitiesPage() {
         <div className="container mx-auto">
         <Breadcrumbs items={breadcrumbs} />
 
-          {amenities.map((category, catIndex) => (
+          {amenities.map((category) => (
             <div key={category.category} className="mb-24">
               <motion.h3 
                 initial={{ opacity: 0, x: -30 }}
