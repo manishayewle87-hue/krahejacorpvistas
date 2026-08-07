@@ -256,11 +256,34 @@ export default async function ProgrammaticLandingPage(props: Props) {
           
           {!isArticle ? (
             <div className="text-center">
-              {/* Semantic LSI Content Injection */}
-              <div 
-                className="mb-12 prose prose-invert max-w-none prose-p:text-lg prose-p:text-white/80 prose-headings:font-serif prose-headings:font-light"
-                dangerouslySetInnerHTML={{ __html: data.content || `<p>${data.description}</p>` }} 
-              />
+              {/* Enterprise-Grade Semantic Content Weaver (Helpful Content Update Compliance) */}
+              {data.content ? (
+                <div 
+                  className="mb-12 prose prose-invert max-w-none prose-p:text-lg prose-p:text-white/80 prose-headings:font-serif prose-headings:font-light text-left"
+                  dangerouslySetInnerHTML={{ __html: data.content }} 
+                />
+              ) : (
+                <div className="mb-12 text-left">
+                  <p className="text-xl text-[var(--color-luxury-gold)] mb-6 font-serif">
+                    {data.description}
+                  </p>
+                  <p className="text-white/70 text-lg mb-6 leading-relaxed">
+                    When evaluating <strong>{data.h1}</strong>, discerning buyers understand that true luxury extends beyond mere square footage. At K Raheja Vistas Mahalunge, we have meticulously engineered a residential ecosystem that redefines the standards of premium living in West Pune. Nestled against the backdrop of scenic foothills, this 7.5-acre master development integrates advanced architectural paradigms with holistic wellness infrastructure.
+                  </p>
+                  <h2 className="text-2xl font-serif text-[var(--color-luxury-pearl)] mb-4 mt-8">The Signature Edge of {data.h1}</h2>
+                  <p className="text-white/70 text-lg mb-6 leading-relaxed">
+                    The demand for <em>{data.h1.toLowerCase()}</em> is driven by a profound shift in lifestyle preferences. Modern professionals and families are no longer settling for conventional apartment layouts. Our premium deck residences are conceptualized to offer continuous, unobstructed views, allowing natural light and ventilation to permeate every corner of your home. The integration of smart-home technology ensures that your living experience is both intuitive and secure.
+                  </p>
+                  <ul className="list-none space-y-3 mb-8 text-white/80">
+                    <li className="flex items-start"><span className="text-[var(--color-luxury-gold)] mr-3">✦</span> <strong>75% Open Landscaping:</strong> Unparalleled green spaces offering a sanctuary from urban congestion.</li>
+                    <li className="flex items-start"><span className="text-[var(--color-luxury-gold)] mr-3">✦</span> <strong>Twin Clubhouses:</strong> State-of-the-art recreational facilities catering to both active and leisure pursuits.</li>
+                    <li className="flex items-start"><span className="text-[var(--color-luxury-gold)] mr-3">✦</span> <strong>Strategic Connectivity:</strong> Seamless access to the Hinjewadi IT corridor and the Mumbai-Pune Expressway.</li>
+                  </ul>
+                  <p className="text-white/70 text-lg mb-6 leading-relaxed">
+                    Investing in <strong>{data.h1}</strong> at K Raheja Vistas is more than a real estate transaction; it is an acquisition of a legacy. The West Pune micro-market continues to exhibit robust capital appreciation, driven by infrastructure developments like the upcoming Metro Line 3 and the PMRDA Town Planning Scheme.
+                  </p>
+                </div>
+              )}
               
               <DynamicGallery slug={slugKey} title={data.h1} />
               
