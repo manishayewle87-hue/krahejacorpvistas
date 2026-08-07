@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -64,11 +65,19 @@ const webStoriesSchema = {
 };
 
 export default function StoriesPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Customer Stories", href: "/stories" }
+  ];
+
+
   return (
     <div className="min-h-screen bg-[var(--color-luxury-charcoal)] pt-32 pb-20 px-6">
       <Script id="web-stories-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webStoriesSchema) }} />
 
       <div className="container mx-auto max-w-6xl">
+        <Breadcrumbs items={breadcrumbs} />
+
         <div className="text-center mb-16">
           <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs font-semibold block mb-4">Visual Stories</span>
           <h1 className="text-5xl md:text-6xl font-serif text-[var(--color-luxury-pearl)] font-light mb-6">

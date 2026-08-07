@@ -1,4 +1,5 @@
 'use client';
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 import { motion } from 'framer-motion';
 import { CheckCircle2, Clock } from 'lucide-react';
@@ -47,9 +48,17 @@ const updates = [
 ];
 
 export default function UpdatesPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Construction Updates", href: "/updates" }
+  ];
+
+
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen pt-40 pb-20 px-6">
       <div className="container mx-auto max-w-4xl">
+        <Breadcrumbs items={breadcrumbs} />
+
         <section className="text-center mb-20">
           <span className="text-[var(--color-luxury-gold)] tracking-[0.3em] uppercase text-sm font-semibold mb-6 block">
             Project Transparency

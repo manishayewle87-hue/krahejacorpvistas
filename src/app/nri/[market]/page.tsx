@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Script from 'next/script';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -97,6 +98,12 @@ export async function generateStaticParams() {
 }
 
 export default function NriLandingPage({ params }: { params: { market: string } }) {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "NRI Market", href: "/nri" }
+  ];
+
+
   const market = NRI_MARKETS[params.market as keyof typeof NRI_MARKETS] || NRI_MARKETS['invest-in-pune-real-estate-from-dubai'];
 
   const schema = {
@@ -120,6 +127,8 @@ export default function NriLandingPage({ params }: { params: { market: string } 
       <Script id="nri-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       <div className="container mx-auto max-w-5xl">
+        <Breadcrumbs items={breadcrumbs} />
+
         {/* Hero */}
         <div className="text-center mb-20">
           <span className="text-5xl block mb-6">{market.flag}</span>

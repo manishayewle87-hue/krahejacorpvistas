@@ -1,8 +1,15 @@
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Image from 'next/image';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ui/ContactFormInline'; // I will create an inline version of the form
 
 export default function CampaignPage({ params }: { params: { id: string } }) {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Campaign", href: "/campaign" }
+  ];
+
+
   // Typical campaigns: "google-search-baner", "meta-remarketing-pune"
   const campaignName = params.id.replace(/-/g, ' ');
 
