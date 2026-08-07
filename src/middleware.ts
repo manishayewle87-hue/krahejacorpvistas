@@ -8,13 +8,26 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const userAgent = request.headers.get('user-agent') || '';
 
-  // Edge Anti-Scraping Defense (Hardening)
-  // Block known aggressive SEO scrapers and empty User-Agents from stealing programmatic content, while allowing Googlebot
-  const blockedBots = ['AhrefsBot', 'SemrushBot', 'MJ12bot', 'DotBot', 'PetalBot', 'Baiduspider', 'YandexBot'];
-  const isBlocked = blockedBots.some(bot => userAgent.includes(bot));
+  // Extreme Digital Fortress: Edge WAF
+  const userAgentLower = userAgent.toLowerCase();
   
-  if (isBlocked || !userAgent || userAgent.trim() === '') {
-    return new NextResponse('Access Denied: Scraper Bot Detected or Invalid User-Agent', { status: 403 });
+  // 1. Block Scripting Agents & Scanners
+  const blockedTools = ['curl', 'wget', 'python-requests', 'libwww-perl', 'go-http-client', 'java', 'nmap', 'sqlmap', 'zgrab'];
+  const isBlockedTool = blockedTools.some(tool => userAgentLower.includes(tool));
+
+  // 2. Block SEO Scrapers & Malicious Bots
+  const blockedBots = ['ahrefsbot', 'semrushbot', 'mj12bot', 'dotbot', 'petalbot', 'baiduspider', 'yandexbot', 'megaindex', 'blexbot', 'screaming frog'];
+  const isBlockedBot = blockedBots.some(bot => userAgentLower.includes(bot));
+
+  // 3. Block Headless Browsers
+  const isHeadless = userAgentLower.includes('headless') || userAgentLower.includes('puppeteer') || userAgentLower.includes('playwright');
+
+  // 4. Block Vulnerability Scans (Heuristics)
+  const pathnameLower = pathname.toLowerCase();
+  const isMaliciousPath = pathnameLower.includes('.env') || pathnameLower.includes('wp-admin') || pathnameLower.includes('wp-login') || pathnameLower.includes('.git') || pathnameLower.includes('union') || pathnameLower.includes('select');
+
+  if (isBlockedTool || isBlockedBot || isHeadless || isMaliciousPath || !userAgent || userAgent.trim() === '') {
+    return new NextResponse('Access Denied: Digital Fortress Firewall', { status: 403 });
   }
 
   // Edge Personalization (Phase 8.3)
@@ -37,11 +50,16 @@ export function middleware(request: NextRequest) {
   }
 
   // Return the response with the modified edge headers
-  return NextResponse.next({
+  const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
   });
+
+  // 5. Block AI Crawlers (LLMs) from stealing proprietary SEO content
+  response.headers.set('X-Robots-Tag', 'noai, noimageai');
+
+  return response;
 }
 
 export const config = {
