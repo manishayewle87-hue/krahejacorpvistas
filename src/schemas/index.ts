@@ -3,7 +3,7 @@
  * This file contains reusable functions to generate strictly typed Schema.org JSON-LD objects.
  */
 
-const DOMAIN = "https://krahejavistasmahalunge.com";
+const DOMAIN = "https://www.krahejacorpvistas.com";
 
 export function generateOrganizationSchema() {
   return {

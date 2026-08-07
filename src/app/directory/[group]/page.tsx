@@ -18,7 +18,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: `Directory Category: ${group.toUpperCase()} | K Raheja Vistas`,
     description: `Browse all K Raheja Vistas real estate listings and insights starting with ${group.toUpperCase()}`,
     alternates: {
-      canonical: `https://krahejavistasmahalunge.com/directory/${group}`,
+      canonical: `https://www.krahejacorpvistas.com/directory/${group}`,
     }
   };
 }

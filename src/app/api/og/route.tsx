@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
             flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'flex-end',
-            backgroundImage: 'url(https://krahejavistasmahalunge.com/assets/hero-masterpiece.jpg)',
+            backgroundImage: 'url(https://www.krahejacorpvistas.com/assets/hero-masterpiece.jpg)',
             backgroundSize: '1200px 630px',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',

@@ -15,7 +15,7 @@ const path = require('path');
 
 const DB_PATH = path.join(__dirname, '../src/data/seo-database.json');
 const SERVICE_ACCOUNT_PATH = path.join(__dirname, 'google-service-account.json');
-const DOMAIN = 'https://krahejavistasmahalunge.com';
+const DOMAIN = 'https://www.krahejacorpvistas.com';
 const BATCH_SIZE = 100;   // Google allows 200/day per service account — be safe
 const BATCH_DELAY_MS = 1000; // 1 second between batches
 

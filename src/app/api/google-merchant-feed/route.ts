@@ -8,8 +8,8 @@ const INVENTORY = [
     id: 'krv-2bhk-deck-001',
     title: 'K Raheja Vistas - Luxury 2 BHK Deck Residence, Mahalunge Pune',
     description: 'Ultra-premium 2 BHK deck residence at K Raheja Vistas, Baner Annexe, Mahalunge, West Pune. 75% open spaces, twin clubhouses, proximity to Hinjewadi IT Park. MahaRERA Registered.',
-    link: 'https://krahejavistasmahalunge.com/configurations/luxury-2-bhk-apartments-mahalunge',
-    image_link: 'https://krahejavistasmahalunge.com/assets/living_room.jpg',
+    link: 'https://www.krahejacorpvistas.com/configurations/luxury-2-bhk-apartments-mahalunge',
+    image_link: 'https://www.krahejacorpvistas.com/assets/living_room.jpg',
     price: '11000000 INR',
     condition: 'new',
     availability: 'in_stock',
@@ -25,8 +25,8 @@ const INVENTORY = [
     id: 'krv-3bhk-deck-001',
     title: 'K Raheja Vistas - Premium 3 BHK Deck Residence, Mahalunge Pune',
     description: 'Ultra-luxury 3 BHK deck residence at K Raheja Vistas, Baner Annexe. Expansive private decks, temperature-controlled pool, smart home integration. MahaRERA: PR1260002501530.',
-    link: 'https://krahejavistasmahalunge.com/configurations/3-bhk-premium-deck-residences-baner-annexe',
-    image_link: 'https://krahejavistasmahalunge.com/assets/actual_3bhk_floorplan.jpg',
+    link: 'https://www.krahejacorpvistas.com/configurations/3-bhk-premium-deck-residences-baner-annexe',
+    image_link: 'https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg',
     price: '14500000 INR',
     condition: 'new',
     availability: 'in_stock',
@@ -42,8 +42,8 @@ const INVENTORY = [
     id: 'krv-4bhk-premium-001',
     title: 'K Raheja Vistas - Spacious 4 BHK Premium Home, Baner Annexe Pune',
     description: 'Palatial 4 BHK premium home at K Raheja Vistas Mahalunge. Multi-generational luxury living with butler service, private gardens, and resort-style amenities in West Pune.',
-    link: 'https://krahejavistasmahalunge.com/configurations/luxury-4-bhk-homes-mahalunge',
-    image_link: 'https://krahejavistasmahalunge.com/assets/actual_clubhouse.jpg',
+    link: 'https://www.krahejacorpvistas.com/configurations/luxury-4-bhk-homes-mahalunge',
+    image_link: 'https://www.krahejacorpvistas.com/assets/actual_clubhouse.jpg',
     price: '22000000 INR',
     condition: 'new',
     availability: 'in_stock',
@@ -59,8 +59,8 @@ const INVENTORY = [
     id: 'krv-duplex-001',
     title: 'K Raheja Vistas - Exclusive Duplex Residence, Mahalunge West Pune',
     description: 'Extraordinary double-height duplex residence at K Raheja Vistas, Baner Annexe. Two-floor luxury living with private terraces and panoramic Baner hill views.',
-    link: 'https://krahejavistasmahalunge.com/configurations/exclusive-duplex-mahalunge',
-    image_link: 'https://krahejavistasmahalunge.com/assets/living_room.jpg',
+    link: 'https://www.krahejacorpvistas.com/configurations/exclusive-duplex-mahalunge',
+    image_link: 'https://www.krahejacorpvistas.com/assets/living_room.jpg',
     price: '28000000 INR',
     condition: 'new',
     availability: 'in_stock',
@@ -76,8 +76,8 @@ const INVENTORY = [
     id: 'krv-penthouse-001',
     title: 'K Raheja Vistas - Sky Penthouse, Mahalunge Baner Annexe Pune',
     description: 'The pinnacle of luxury living — Sky Penthouses at K Raheja Vistas Mahalunge. 360-degree panoramic views, exclusive sky deck, premium concierge. The crown of West Pune.',
-    link: 'https://krahejavistasmahalunge.com/configurations/sky-penthouse-baner-annexe-pune',
-    image_link: 'https://krahejavistasmahalunge.com/assets/actual_master_layout.jpg',
+    link: 'https://www.krahejacorpvistas.com/configurations/sky-penthouse-baner-annexe-pune',
+    image_link: 'https://www.krahejacorpvistas.com/assets/actual_master_layout.jpg',
     price: '45000000 INR',
     condition: 'new',
     availability: 'in_stock',
@@ -116,7 +116,7 @@ export async function GET(req: NextRequest) {
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
     <title>K Raheja Vistas Mahalunge - Luxury Property Feed</title>
-    <link>https://krahejavistasmahalunge.com</link>
+    <link>https://www.krahejacorpvistas.com</link>
     <description>Ultra-premium residences at K Raheja Vistas, Baner Annexe, Mahalunge, West Pune</description>
     ${xmlItems}
   </channel>

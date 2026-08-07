@@ -45,7 +45,7 @@ export async function submitLead(prevState: any, formData: FormData) {
     // Phase 9.3: Automated Omnichannel Follow-ups (WhatsApp)
     console.log(`--- TRIGGERING WHATSAPP API (Simulated) ---`);
     console.log(`To: +91${validatedData.phone}`);
-    console.log(`Message: "Hi ${validatedData.name}, thank you for your interest in K Raheja Vistas Mahalunge. Here is your requested brochure: https://krahejavistasmahalunge.com/brochure.pdf. A luxury consultant will call you shortly."`);
+    console.log(`Message: "Hi ${validatedData.name}, thank you for your interest in K Raheja Vistas Mahalunge. Here is your requested brochure: https://www.krahejacorpvistas.com/brochure.pdf. A luxury consultant will call you shortly."`);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     return { success: true, message: 'Thank you for your interest. A luxury consultant will contact you shortly.' };

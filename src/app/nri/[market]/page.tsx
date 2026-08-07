@@ -32,10 +32,10 @@ export function generateMetadata({ params }: { params: { market: string } }): Me
     title: data.title,
     description: data.description,
     alternates: {
-      canonical: `https://krahejavistasmahalunge.com/nri/${params.market}`,
+      canonical: `https://www.krahejacorpvistas.com/nri/${params.market}`,
       languages: {
-        [data.locale]: `https://krahejavistasmahalunge.com/nri/${params.market}`,
-        'x-default': `https://krahejavistasmahalunge.com/`,
+        [data.locale]: `https://www.krahejacorpvistas.com/nri/${params.market}`,
+        'x-default': `https://www.krahejacorpvistas.com/`,
       },
     },
     openGraph: {
@@ -104,7 +104,7 @@ export default function NriLandingPage({ params }: { params: { market: string } 
     "@type": "RealEstateListing",
     "name": `K Raheja Vistas Mahalunge — NRI Investment from ${market.city}`,
     "description": `Ultra-luxury residences at K Raheja Vistas Mahalunge for NRI investors based in ${market.city}. MahaRERA Registered.`,
-    "url": `https://krahejavistasmahalunge.com/nri/${params.market}`,
+    "url": `https://www.krahejacorpvistas.com/nri/${params.market}`,
     "inLanguage": "en",
     "audience": { "@type": "Audience", "audienceType": `Non-Resident Indians in ${market.city}` },
     "offers": {

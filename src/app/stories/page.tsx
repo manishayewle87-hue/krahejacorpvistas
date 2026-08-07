@@ -59,7 +59,7 @@ const webStoriesSchema = {
     "@type": "ListItem",
     "position": i + 1,
     "name": s.title,
-    "url": `https://krahejavistasmahalunge.com/stories#${s.id}`
+    "url": `https://www.krahejacorpvistas.com/stories#${s.id}`
   }))
 };
 

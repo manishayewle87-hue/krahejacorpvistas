@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import seoDatabase from '@/data/seo-database.json';
 
-const DOMAIN = 'krahejavistasmahalunge.com';
+const DOMAIN = 'www.krahejacorpvistas.com';
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || 'default-indexnow-key'; // Ensure this matches the key file hosted on root
 
 export async function POST(req: Request) {

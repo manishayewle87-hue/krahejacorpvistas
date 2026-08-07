@@ -103,7 +103,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: data.title,
     description: data.description,
-    alternates: { canonical: `https://krahejavistasmahalunge.com/compare/${slug}` },
+    alternates: { canonical: `https://www.krahejacorpvistas.com/compare/${slug}` },
   };
 }
 

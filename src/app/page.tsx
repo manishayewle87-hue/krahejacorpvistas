@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "New Launch Projects Pune West", "Ready Possession Flats Mahalunge"
   ],
   alternates: {
-    canonical: 'https://krahejavistasmahalunge.com/',
+    canonical: 'https://www.krahejacorpvistas.com/',
   }
 };
 

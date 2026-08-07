@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = 'https://krahejavistasmahalunge.com';
+const DOMAIN = 'https://www.krahejacorpvistas.com';
 const URLS_PER_SITEMAP = 500;
 
 function main() {

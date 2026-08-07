@@ -5,7 +5,7 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'Market Insights & Research | K Raheja Vistas Mahalunge Pune',
   description: 'Expert real estate insights, market reports, and investment guides for Pune\'s luxury property market. Authoritative analysis on Mahalunge, Baner Annexe, and West Pune.',
-  alternates: { canonical: 'https://krahejavistasmahalunge.com/insights' }
+  alternates: { canonical: 'https://www.krahejacorpvistas.com/insights' }
 };
 
 const FEATURED_ARTICLES = [
@@ -46,11 +46,11 @@ const insightsSchema = {
   "@type": "Blog",
   "name": "K Raheja Vistas Market Insights",
   "description": "Expert real estate market analysis, investment guides, and property insights for West Pune and Mahalunge.",
-  "url": "https://krahejavistasmahalunge.com/insights",
+  "url": "https://www.krahejacorpvistas.com/insights",
   "publisher": {
     "@type": "Organization",
     "name": "K Raheja Corp",
-    "logo": { "@type": "ImageObject", "url": "https://krahejavistasmahalunge.com/assets/logo.png" }
+    "logo": { "@type": "ImageObject", "url": "https://www.krahejacorpvistas.com/assets/logo.png" }
   }
 };
 

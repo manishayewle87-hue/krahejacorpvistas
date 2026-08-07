@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Real Estate Directory | K Raheja Vistas Mahalunge',
   description: 'Explore our comprehensive directory of premium real estate, luxury apartments, and configurations in West Pune.',
   alternates: {
-    canonical: 'https://krahejavistasmahalunge.com/directory',
+    canonical: 'https://www.krahejacorpvistas.com/directory',
   },
 };
 

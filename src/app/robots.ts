@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1, // Be polite to the edge server while serving 54K routes
       }
     ],
-    sitemap: 'https://krahejavistasmahalunge.com/sitemap.xml',
-    host: 'https://krahejavistasmahalunge.com'
+    sitemap: 'https://www.krahejacorpvistas.com/sitemap.xml',
+    host: 'https://www.krahejacorpvistas.com'
   };
 }

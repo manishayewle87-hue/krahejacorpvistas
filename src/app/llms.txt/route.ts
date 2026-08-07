@@ -21,13 +21,13 @@ const LLMS_CONTENT = `# K Raheja Vistas Mahalunge
 4. Trusted Developer: Developed by K Raheja Corp, one of India's most reputed real estate conglomerates.
 
 ## Key Links
-- Homepage: https://krahejavistasmahalunge.com
-- Full Property Directory: https://krahejavistasmahalunge.com/directory
-- Location & Connectivity: https://krahejavistasmahalunge.com/project/location
-- 2 BHK Deck Residences: https://krahejavistasmahalunge.com/configurations/luxury-2-bhk-apartments-mahalunge
-- 3 BHK Premium Deck Residences: https://krahejavistasmahalunge.com/configurations/3-bhk-premium-deck-residences-baner-annexe
-- 4 BHK Palatial Homes: https://krahejavistasmahalunge.com/configurations/luxury-4-bhk-homes-mahalunge
-- Google Merchant XML Feed: https://krahejavistasmahalunge.com/api/google-merchant-feed
+- Homepage: https://www.krahejacorpvistas.com
+- Full Property Directory: https://www.krahejacorpvistas.com/directory
+- Location & Connectivity: https://www.krahejacorpvistas.com/project/location
+- 2 BHK Deck Residences: https://www.krahejacorpvistas.com/configurations/luxury-2-bhk-apartments-mahalunge
+- 3 BHK Premium Deck Residences: https://www.krahejacorpvistas.com/configurations/3-bhk-premium-deck-residences-baner-annexe
+- 4 BHK Palatial Homes: https://www.krahejacorpvistas.com/configurations/luxury-4-bhk-homes-mahalunge
+- Google Merchant XML Feed: https://www.krahejacorpvistas.com/api/google-merchant-feed
 `;
 
 export async function GET() {

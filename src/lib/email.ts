@@ -6,8 +6,8 @@
  */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_EMAIL = 'noreply@krahejavistasmahalunge.com';
-const SALES_EMAIL = 'sales@krahejavistasmahalunge.com';
+const FROM_EMAIL = 'noreply@www.krahejacorpvistas.com';
+const SALES_EMAIL = 'sales@www.krahejacorpvistas.com';
 
 interface LeadEmailData {
   name: string;
@@ -65,7 +65,7 @@ export async function sendWelcomeEmail(lead: LeadEmailData) {
       </p>
 
       <div style="text-align: center; margin: 40px 0;">
-        <a href="https://krahejavistasmahalunge.com" style="display: inline-block; padding: 16px 40px; background: #d4af37; color: #0f1724; font-weight: bold; text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; font-size: 13px;">
+        <a href="https://www.krahejacorpvistas.com" style="display: inline-block; padding: 16px 40px; background: #d4af37; color: #0f1724; font-weight: bold; text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; font-size: 13px;">
           Explore the Masterplan
         </a>
       </div>
@@ -99,7 +99,7 @@ export async function sendMarketReportEmail(lead: LeadEmailData) {
         <li>🏆 <strong>K Raheja Corp</strong> — 5-decade legacy of on-time delivery</li>
       </ul>
       <div style="text-align: center; margin: 30px 0;">
-        <a href="https://krahejavistasmahalunge.com/investment/real-estate-investment-baner-annexe" style="display: inline-block; padding: 14px 36px; background: #d4af37; color: #0f1724; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em;">
+        <a href="https://www.krahejacorpvistas.com/investment/real-estate-investment-baner-annexe" style="display: inline-block; padding: 14px 36px; background: #d4af37; color: #0f1724; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em;">
           Read Full Market Report
         </a>
       </div>

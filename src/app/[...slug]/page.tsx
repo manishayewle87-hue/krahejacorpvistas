@@ -24,13 +24,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   
   if (!data) return {};
 
-  const ogUrl = `https://krahejavistasmahalunge.com/api/og?title=${encodeURIComponent(data.h1)}&category=${encodeURIComponent(data.category)}`;
+  const ogUrl = `https://www.krahejacorpvistas.com/api/og?title=${encodeURIComponent(data.h1)}&category=${encodeURIComponent(data.category)}`;
 
   return {
     title: data.title,
     description: data.description,
     alternates: {
-      canonical: `https://krahejavistasmahalunge.com/${slugKey}`,
+      canonical: `https://www.krahejacorpvistas.com/${slugKey}`,
     },
     openGraph: {
       title: data.title,
@@ -151,7 +151,7 @@ export default async function ProgrammaticLandingPage(props: Props) {
                   "@type": "RealEstateListing",
                   "name": data.title,
                   "description": data.description,
-                  "url": `https://krahejavistasmahalunge.com/${slugKey}`,
+                  "url": `https://www.krahejacorpvistas.com/${slugKey}`,
                   "datePosted": new Date().toISOString().split('T')[0],
                   "about": {
                     "@type": "ApartmentComplex",
@@ -194,7 +194,7 @@ export default async function ProgrammaticLandingPage(props: Props) {
                     "seller": {
                       "@type": "RealEstateAgent",
                       "name": "K Raheja Corp",
-                      "image": "https://krahejavistasmahalunge.com/assets/logo.png"
+                      "image": "https://www.krahejacorpvistas.com/assets/logo.png"
                     }
                   }
                 })
@@ -212,14 +212,14 @@ export default async function ProgrammaticLandingPage(props: Props) {
                     "@type": "Product",
                     "name": data.title,
                     "description": data.description,
-                    "image": "https://krahejavistasmahalunge.com/assets/actual_3bhk_floorplan.jpg",
+                    "image": "https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg",
                     "brand": { "@type": "Brand", "name": "K Raheja Corp" },
                     "offers": {
                       "@type": "Offer",
                       "price": "11000000",
                       "priceCurrency": "INR",
                       "availability": "https://schema.org/InStock",
-                      "url": `https://krahejavistasmahalunge.com/${slugKey}`
+                      "url": `https://www.krahejacorpvistas.com/${slugKey}`
                     }
                   })
                 }}
@@ -237,25 +237,25 @@ export default async function ProgrammaticLandingPage(props: Props) {
                     "@type": "NewsArticle",
                     "headline": data.h1,
                     "description": data.description,
-                    "image": "https://krahejavistasmahalunge.com/assets/actual_master_layout.jpg",
+                    "image": "https://www.krahejacorpvistas.com/assets/actual_master_layout.jpg",
                     "datePublished": new Date().toISOString(),
                     "dateModified": new Date().toISOString(),
                     "author": {
                       "@type": "Organization",
                       "name": "K Raheja Corp",
-                      "url": "https://krahejavistasmahalunge.com"
+                      "url": "https://www.krahejacorpvistas.com"
                     },
                     "publisher": {
                       "@type": "Organization",
                       "name": "K Raheja Vistas Market Insights",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://krahejavistasmahalunge.com/assets/logo.png"
+                        "url": "https://www.krahejacorpvistas.com/assets/logo.png"
                       }
                     },
                     "mainEntityOfPage": {
                       "@type": "WebPage",
-                      "@id": `https://krahejavistasmahalunge.com/${slugKey}`
+                      "@id": `https://www.krahejacorpvistas.com/${slugKey}`
                     },
                     "keywords": `${data.h1}, Pune Real Estate, Luxury Homes Pune, West Pune Property, Mahalunge Investment, K Raheja Vistas`
                   })

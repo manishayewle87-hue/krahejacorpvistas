@@ -16,7 +16,7 @@ export default function LocationPage() {
     "@type": "ApartmentComplex",
     "name": "K Raheja Vistas Mahalunge",
     "description": "Ultra-luxury deck residences and apartments located at Baner Annexe, Mahalunge, West Pune.",
-    "url": "https://krahejavistasmahalunge.com/project/location",
+    "url": "https://www.krahejacorpvistas.com/project/location",
     "hasMap": "https://www.google.com/maps?cid=0xc3b8a1c865fcd5d0",
     "geo": {
       "@type": "GeoCoordinates",
