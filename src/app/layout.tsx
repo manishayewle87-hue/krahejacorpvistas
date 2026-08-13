@@ -74,7 +74,7 @@ export const viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["RealEstateAgent", "LocalBusiness", "Organization"],
+  "@type": ["RealEstateAgent", "LocalBusiness", "Organization", "ApartmentComplex"],
   "name": "K Raheja Vistas Mahalunge Pune",
   "legalName": "K Raheja Corp",
   "image": `${DOMAIN}/assets/logo.png`,

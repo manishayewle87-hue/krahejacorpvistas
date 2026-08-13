@@ -82,10 +82,10 @@ function main() {
 
   sitemapIndexXml += `</sitemapindex>`;
   
-  // Write the main sitemap.xml index to the root of public/
-  fs.writeFileSync(path.join(process.cwd(), 'public/sitemap.xml'), sitemapIndexXml);
+  // Write the main sitemap-index.xml index to the root of public/
+  fs.writeFileSync(path.join(process.cwd(), 'public/sitemap-index.xml'), sitemapIndexXml);
 
-  console.log(`Successfully generated ${totalSitemaps} static sitemaps and index public/sitemap.xml for ${dynamicSlugs.length} routes.`);
+  console.log(`Successfully generated ${totalSitemaps} static sitemaps and index public/sitemap-index.xml for ${dynamicSlugs.length} routes.`);
 }
 
 main();
