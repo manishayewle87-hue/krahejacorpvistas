@@ -32,6 +32,10 @@ const VOICE_FAQS = [
   {
     question: "What is the rental yield in Mahalunge West Pune?",
     answer: "Properties in Mahalunge, West Pune currently command rental yields of 4 to 6 percent per annum, driven by high demand from professionals working in the Hinjewadi IT corridor — home to over 300,000 IT employees across 200 multinational companies."
+  },
+  {
+    question: "Is K Raheja Vistas the best K Raheja Corp project in Pune?",
+    answer: "K Raheja Vistas Mahalunge is widely considered one of the flagship K Raheja Corp projects in Pune. Building on the legacy of K Raheja Corp's commercial and residential excellence across India, this 7.5-acre development represents the pinnacle of luxury living in Pune West."
   }
 ];
 

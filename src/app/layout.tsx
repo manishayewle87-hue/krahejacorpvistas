@@ -97,6 +97,8 @@ const jsonLd = {
     "twin clubhouses",
     "MahaRERA PR1260002501530",
     "NRI property investment Mahalunge",
+    "K Raheja Corp Pune Projects",
+    "Best K Raheja Corp Projects in Pune",
     "capital appreciation Baner",
     "rental yields Hinjewadi"
   ],

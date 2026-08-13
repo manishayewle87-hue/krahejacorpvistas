@@ -12,7 +12,8 @@ export const metadata: Metadata = {
     "K Raheja Vistas Mahalunge", "K Raheja Vistas Pune", "Luxury Apartments Pune", 
     "Premium Deck Residences Mahalunge", "2 BHK Flats Baner Annexe", 
     "3 BHK Flats Baner Annexe", "4 BHK Duplex Pune", "Hinjewadi IT Park real estate", 
-    "New Launch Projects Pune West", "Ready Possession Flats Mahalunge"
+    "New Launch Projects Pune West", "Ready Possession Flats Mahalunge",
+    "K Raheja Corp Pune Projects", "Best K Raheja Corp Projects in Pune", "K Raheja Corp Baner"
   ],
   alternates: {
     canonical: 'https://www.krahejacorpvistas.com/',
