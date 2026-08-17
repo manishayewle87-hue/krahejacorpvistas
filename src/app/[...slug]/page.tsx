@@ -132,7 +132,7 @@ export default async function ProgrammaticLandingPage(props: Props) {
         
         <Breadcrumbs items={breadcrumbItems} />
 
-        {/* Article Schema for Blogs */}
+        {/* Article Schema for Blogs — datePublished required for Google Discover */}
         {isArticle ? (
           <Script
             id="article-schema"
@@ -140,13 +140,38 @@ export default async function ProgrammaticLandingPage(props: Props) {
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "Article",
+                "@type": "NewsArticle",
                 "headline": data.title,
                 "description": data.description,
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://www.krahejacorpvistas.com/assets/banner.jpg",
+                  "width": 1200,
+                  "height": 630
+                },
+                "datePublished": "2025-01-15T09:00:00+05:30",
+                "dateModified": new Date().toISOString(),
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": `https://www.krahejacorpvistas.com/${slugKey}`
+                },
                 "author": {
                   "@type": "Organization",
-                  "name": "K Raheja Corp"
-                }
+                  "name": "K Raheja Corp",
+                  "url": "https://www.krahejacorpvistas.com"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "K Raheja Vistas Mahalunge",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.krahejacorpvistas.com/assets/logo.png",
+                    "width": 200,
+                    "height": 60
+                  }
+                },
+                "keywords": `${data.h1}, Pune Real Estate 2025, Luxury Homes Pune, West Pune Property, Mahalunge Investment, K Raheja Vistas`,
+                "articleSection": "Real Estate Insights"
               })
             }}
           />
@@ -289,6 +314,52 @@ export default async function ProgrammaticLandingPage(props: Props) {
                 }}
               />
             )}
+
+            {/* === GOOGLE IMAGE SEARCH: ImageObject schema for gallery images === */}
+            <Script
+              id="imageobject-schema"
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "ImageGallery",
+                  "name": `${data.h1} — Photo Gallery`,
+                  "description": `High-resolution photos and images of ${data.h1} at K Raheja Vistas Mahalunge, Baner Annexe, Pune.`,
+                  "url": `https://www.krahejacorpvistas.com/${slugKey}`,
+                  "image": [
+                    {
+                      "@type": "ImageObject",
+                      "contentUrl": "https://www.krahejacorpvistas.com/assets/banner.jpg",
+                      "name": `K Raheja Vistas Mahalunge — ${data.h1}`,
+                      "description": `Ultra-luxury deck residences at K Raheja Vistas Mahalunge, Pune — ${data.h1}`,
+                      "width": 1920, "height": 1080,
+                      "representativeOfPage": true
+                    },
+                    {
+                      "@type": "ImageObject",
+                      "contentUrl": "https://www.krahejacorpvistas.com/assets/living_room.jpg",
+                      "name": "K Raheja Vistas Mahalunge — Premium Living Room Interior",
+                      "description": "Exquisitely designed living room with floor-to-ceiling windows and private deck access at K Raheja Vistas Mahalunge.",
+                      "width": 1920, "height": 1080
+                    },
+                    {
+                      "@type": "ImageObject",
+                      "contentUrl": "https://www.krahejacorpvistas.com/assets/actual_master_layout.jpg",
+                      "name": "K Raheja Vistas Mahalunge — Master Site Layout Plan",
+                      "description": "7.5-acre master layout of K Raheja Vistas Mahalunge showing 7 towers, twin clubhouses and 75% open green spaces.",
+                      "width": 1920, "height": 1080
+                    },
+                    {
+                      "@type": "ImageObject",
+                      "contentUrl": "https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg",
+                      "name": "K Raheja Vistas Mahalunge — 3 BHK Deck Apartment Floor Plan",
+                      "description": "Detailed floor plan of the 3 BHK premium deck apartment at K Raheja Vistas Mahalunge, Baner Annexe, Pune.",
+                      "width": 1200, "height": 900
+                    }
+                  ]
+                })
+              }}
+            />
           </>
         )}
         <div className="max-w-4xl mx-auto bg-black/30 backdrop-blur-md p-10 md:p-16 rounded-2xl border border-white/5 shadow-2xl">

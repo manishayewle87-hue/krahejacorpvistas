@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
   manifest: "/manifest.json",
   title: {
-    default: "K Raheja Vistas Mahalunge | Ultra-Luxury Real Estate",
+    default: "K Raheja Vistas Mahalunge | Ultra-Luxury 2, 3 & 4 BHK Deck Homes in Pune",
     template: "%s | K Raheja Vistas Mahalunge"
   },
-  description: "Experience premium deck residences surrounded by panoramic foothills and thoughtfully designed luxury living at Baner Annex, Pune. A 7.5-acre masterpiece.",
-  keywords: ["Luxury Apartments Baner", "K Raheja Vistas", "Premium Deck Residences Pune", "Mahalunge Real Estate", "2 BHK Baner", "3 BHK Baner"],
+  description: "Discover K Raheja Vistas Mahalunge — ultra-luxury 2, 3 & 4 BHK premium deck residences on 7.5 acres at Baner Annexe, Pune by K Raheja Corp. MahaRERA: PR1260002501530. Starting ₹1.10 Cr.",
+  keywords: ["K Raheja Vistas Mahalunge", "K Raheja Vistas price", "Luxury Apartments Baner", "Premium Deck Residences Pune", "2 BHK Baner Annexe", "3 BHK Mahalunge Pune", "4 BHK duplex Mahalunge", "Mahalunge Real Estate 2025", "invest in Pune real estate", "MahaRERA PR1260002501530"],
   alternates: {
     canonical: '/',
     languages: {
@@ -111,15 +111,57 @@ const jsonLd = {
   "makesOffer": [
     {
       "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Ultra Luxury Real Estate Sales"
-      }
+      "name": "2 BHK Ultra-Luxury Deck Apartments",
+      "description": "2 BHK premium deck residences at K Raheja Vistas Mahalunge starting from ₹1.10 Crore.",
+      "price": "11000000",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": `${DOMAIN}/configurations/2-bhk-luxury-apartments-mahalunge-pune`,
+      "itemOffered": { "@type": "Apartment", "name": "2 BHK Deck Apartment", "numberOfRooms": 2 }
+    },
+    {
+      "@type": "Offer",
+      "name": "3 BHK Ultra-Luxury Deck Residences",
+      "description": "3 BHK premium deck residences at K Raheja Vistas Mahalunge starting from ₹1.45 Crore.",
+      "price": "14500000",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": `${DOMAIN}/configurations/3-bhk-luxury-deck-apartments-mahalunge-pune`,
+      "itemOffered": { "@type": "Apartment", "name": "3 BHK Deck Residence", "numberOfRooms": 3 }
+    },
+    {
+      "@type": "Offer",
+      "name": "4 BHK Ultra-Luxury Deck Homes",
+      "description": "4 BHK spacious luxury homes at K Raheja Vistas Mahalunge starting from ₹2.10 Crore.",
+      "price": "21000000",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": `${DOMAIN}/configurations/4-bhk-luxury-homes-mahalunge-pune`,
+      "itemOffered": { "@type": "Apartment", "name": "4 BHK Deck Home", "numberOfRooms": 4 }
+    },
+    {
+      "@type": "Offer",
+      "name": "Duplex & Penthouse Signature Residences",
+      "description": "Exclusive duplex and sky penthouse residences at K Raheja Vistas Mahalunge starting from ₹2.50 Crore.",
+      "price": "25000000",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/LimitedAvailability",
+      "url": `${DOMAIN}/configurations/duplex-penthouse-mahalunge-pune`,
+      "itemOffered": { "@type": "Apartment", "name": "Duplex Penthouse", "numberOfRooms": 5 }
     }
   ],
   "foundingDate": "1956",
-  "description": "K Raheja Vistas Mahalunge is an ultra-luxury gated residential community by K Raheja Corp in Baner Annexe, Mahalunge, West Pune. It spans 7.5 acres with 7 towers, 650 premium deck residences, twin clubhouses and 75% open spaces. MahaRERA: PR1260002501530.",
-  "hasMap": "https://www.google.com/maps/place/Raheja+Vistas,+Baner+Annex/@18.7931162,72.74406,224939m/data=!3m1!1e3!4m10!1m2!2m1!1sk+raheja+vistas!3m6!1s0x3bc2bd1ba628e2dd:0x31853fa95ad0ea42!8m2!3d18.563551!4d73.7339978!15sCg9rIHJhaGVqYSB2aXN0YXNaESIPayByYWhlamEgdmlzdGFzkgEUY29uc3RydWN0aW9uX2NvbXBhbnmaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnBTWVZSRVpFSldNMXB1VVROa1dsUXpaSHBVVkZvMFkwZHdkMU50WXhBQuABAPoBBAgAECA!16s%2Fg%2F11xvzwkwk5",
+  "sameAs": [
+    "https://www.linkedin.com/company/k-raheja-corp",
+    "https://www.facebook.com/KRahejaCorp",
+    "https://twitter.com/krahejacorp",
+    "https://www.instagram.com/krahejacorp",
+    "https://www.youtube.com/@krahejacorp",
+    "https://en.wikipedia.org/wiki/K_Raheja_Corp",
+    "https://www.wikidata.org/wiki/K_Raheja_Corp",
+    "https://maps.app.goo.gl/Ej3VN8k7QdF2vRzw5",
+    "https://www.krahejacorp.com"
+  ],
   "knowsAbout": [
     "Luxury Real Estate Pune",
     "Ultra Premium Deck Residences",
@@ -278,6 +320,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
+        <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+        {/* LCP Preload: Banner image is the Largest Contentful Paint element. Preloading it cuts LCP by ~200-400ms. */}
+        <link rel="preload" as="image" href="/assets/banner.jpg" fetchPriority="high" />
         <link rel="alternate" type="application/rss+xml" title="K Raheja Vistas - Google Shopping & Merchant Feed" href="https://www.krahejacorpvistas.com/api/google-merchant-feed" />
       </head>
       <body className="min-h-full flex flex-col selection:bg-[var(--color-luxury-gold)] selection:text-white font-sans overflow-x-hidden">
