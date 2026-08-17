@@ -4,6 +4,11 @@ import type { NextRequest } from 'next/server';
 const locales = ['en', 'mr', 'hi'];
 const defaultLocale = 'en';
 
+// --- IN-MEMORY EDGE RATE LIMITER (POST submissions only) ---
+const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const MAX_POST_REQUESTS = 5;
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const userAgent = request.headers.get('user-agent') || '';
@@ -22,8 +27,8 @@ export function middleware(request: NextRequest) {
     'majestic', 'rogerbot', 'exabot', 'gigabot', 'scrapy', 'wget',
     'ia_archiver', 'facebookexternalhit',
     // AI Content Scrapers (unauthorized training crawlers)
-    'gptbot', 'chatgpt-user', 'anthropic-ai', 'claude-web', 'cohere-ai',
-    'ccbot', 'commoncrawl', 'diffbot', 'bytespider', 'omgili'
+    'gptbot', 'chatgpt-user', 'anthropic-ai', 'claude-web', 'claudebot', 'cohere-ai',
+    'perplexitybot', 'google-extended', 'ccbot', 'commoncrawl', 'diffbot', 'bytespider', 'omgili'
   ];
   const isBlockedBot = blockedBots.some(bot => userAgentLower.includes(bot));
 
@@ -39,11 +44,37 @@ export function middleware(request: NextRequest) {
   }
 
   // Edge Personalization (Phase 8.3)
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
   const city = request.headers.get('x-vercel-ip-city') || request.headers.get('cf-ipcity') || 'Unknown';
   const country = request.headers.get('x-vercel-ip-country') || request.headers.get('cf-ipcountry') || 'Unknown';
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-user-city', city);
   requestHeaders.set('x-user-country', country);
+
+  // --- RATE LIMITING (POST requests only) ---
+  let rateLimitRemaining = MAX_POST_REQUESTS;
+  if (request.method === 'POST') {
+    const now = Date.now();
+    const entry = rateLimitMap.get(ip);
+    if (entry && now - entry.timestamp < RATE_LIMIT_WINDOW_MS) {
+      if (entry.count >= MAX_POST_REQUESTS) {
+        return new NextResponse('Too Many Requests', {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': String(MAX_POST_REQUESTS),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': String(Math.ceil((entry.timestamp + RATE_LIMIT_WINDOW_MS) / 1000)),
+            'Retry-After': '60',
+          },
+        });
+      }
+      entry.count++;
+      rateLimitRemaining = MAX_POST_REQUESTS - entry.count;
+    } else {
+      rateLimitMap.set(ip, { count: 1, timestamp: now });
+      rateLimitRemaining = MAX_POST_REQUESTS - 1;
+    }
+  }
 
   // i18n Routing (Phase 10.2)
   // Check if there is any supported locale in the pathname
@@ -66,6 +97,11 @@ export function middleware(request: NextRequest) {
 
   // 5. Block AI Crawlers (LLMs) from stealing proprietary SEO content
   response.headers.set('X-Robots-Tag', 'noai, noimageai');
+  // Rate-limit signaling for POST endpoints
+  if (request.method === 'POST') {
+    response.headers.set('X-RateLimit-Limit', String(MAX_POST_REQUESTS));
+    response.headers.set('X-RateLimit-Remaining', String(Math.max(0, rateLimitRemaining)));
+  }
 
   return response;
 }
