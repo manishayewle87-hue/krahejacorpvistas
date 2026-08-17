@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     canonical: '/',
     languages: {
       'en-IN': '/',
+      'en-US': '/', // US NRI target
+      'en-AE': '/', // Dubai/UAE NRI target
+      'en-GB': '/', // UK NRI target
+      'en-SG': '/', // Singapore NRI target
       'x-default': '/',
     }
   },
@@ -81,6 +85,24 @@ const jsonLd = {
   "@id": DOMAIN,
   "url": DOMAIN,
   "telephone": "+91-1234567890",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-1234567890",
+      "contactType": "customer service",
+      "areaServed": ["IN", "US", "AE", "GB", "SG"],
+      "availableLanguage": ["English", "Hindi", "Marathi"]
+    }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Ultra Luxury Real Estate Sales"
+      }
+    }
+  ],
   "foundingDate": "1956",
   "description": "K Raheja Vistas Mahalunge is an ultra-luxury gated residential community by K Raheja Corp in Baner Annexe, Mahalunge, West Pune. It spans 7.5 acres with 7 towers, 650 premium deck residences, twin clubhouses and 75% open spaces. MahaRERA: PR1260002501530.",
   "hasMap": "https://www.google.com/maps/place/Raheja+Vistas,+Baner+Annex/data=!4m2!3m1!1s0x0:0x31853fa95ad0ea42?sa=X&ved=1t:2428&ictx=111",

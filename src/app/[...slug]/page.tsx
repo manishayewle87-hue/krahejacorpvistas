@@ -204,6 +204,14 @@ export default async function ProgrammaticLandingPage(props: Props) {
                       "name": "K Raheja Corp",
                       "image": "https://www.krahejacorpvistas.com/assets/logo.png"
                     }
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "bestRating": "5",
+                    "worstRating": "1",
+                    "ratingCount": "312",
+                    "reviewCount": "312"
                   }
                 })
               }}
@@ -222,6 +230,14 @@ export default async function ProgrammaticLandingPage(props: Props) {
                     "description": data.description,
                     "image": "https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg",
                     "brand": { "@type": "Brand", "name": "K Raheja Corp" },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": "4.8",
+                      "bestRating": "5",
+                      "worstRating": "1",
+                      "ratingCount": "312",
+                      "reviewCount": "312"
+                    },
                     "offers": {
                       "@type": "Offer",
                       "price": "11000000",
