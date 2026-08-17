@@ -222,14 +222,48 @@ const jsonLd = {
   }
 };
 
+// WebSite schema — triggers Google Sitelinks SearchBox in SERP for branded queries
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "K Raheja Vistas Mahalunge",
+  "url": DOMAIN,
+  "@id": `${DOMAIN}/#website`,
+  "description": "Official website of K Raheja Vistas Mahalunge — ultra-luxury 2, 3 & 4 BHK deck residences at Baner Annexe, Pune by K Raheja Corp.",
+  "inLanguage": "en-IN",
+  "publisher": {
+    "@type": "Organization",
+    "@id": DOMAIN,
+    "name": "K Raheja Corp"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${DOMAIN}/directory?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
 const videoLd = {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  "name": "K Raheja Vistas Mahalunge Tour",
-  "description": "Virtual tour of the premium deck residences at K Raheja Vistas Mahalunge, Pune.",
+  "name": "K Raheja Vistas Mahalunge — Official Project Tour",
+  "description": "Virtual tour of the ultra-luxury premium deck residences at K Raheja Vistas Mahalunge, Baner Annexe, Pune by K Raheja Corp.",
   "thumbnailUrl": `${DOMAIN}/assets/video-thumb.jpg`,
-  "uploadDate": "2024-01-01T08:00:00+08:00",
-  "contentUrl": `${DOMAIN}/assets/video.mp4`
+  "uploadDate": "2025-01-01T09:00:00+05:30",
+  "duration": "PT3M30S",
+  "contentUrl": `${DOMAIN}/assets/video.mp4`,
+  "embedUrl": `${DOMAIN}/project/gallery`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "K Raheja Corp",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${DOMAIN}/assets/logo.png`
+    }
+  }
 };
 
 export default function RootLayout({
@@ -256,6 +290,11 @@ export default function RootLayout({
           id="video-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }}
+        />
+        <script
+          id="website-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
         />
         {/* GA4 / GTM Integration */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
