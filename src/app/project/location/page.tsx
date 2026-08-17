@@ -20,15 +20,16 @@ export default function LocationPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ApartmentComplex",
+    "@type": ["ApartmentComplex", "TouristAttraction"],
     "name": "K Raheja Vistas Mahalunge",
-    "description": "Ultra-luxury deck residences and apartments located at Baner Annexe, Mahalunge, West Pune.",
+    "description": "Ultra-luxury premium deck residences at Baner Annexe, Mahalunge, West Pune. 7.5 acres, 650 homes, twin clubhouses, MahaRERA: PR1260002501530.",
     "url": "https://www.krahejacorpvistas.com/project/location",
-    "hasMap": "https://www.google.com/maps?cid=0xc3b8a1c865fcd5d0",
+    "hasMap": "https://www.google.com/maps/place/Raheja+Vistas,+Baner+Annex/@18.7931162,72.74406,224939m/data=!3m1!1e3!4m10!1m2!2m1!1sk+raheja+vistas!3m6!1s0x3bc2bd1ba628e2dd:0x31853fa95ad0ea42!8m2!3d18.563551!4d73.7339978",
+    "image": "https://www.krahejacorpvistas.com/assets/actual_master_layout.jpg",
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "18.5678443",
-      "longitude": "73.7380126"
+      "latitude": "18.563551",
+      "longitude": "73.7339978"
     },
     "address": {
       "@type": "PostalAddress",
@@ -38,6 +39,13 @@ export default function LocationPage() {
       "postalCode": "411045",
       "addressCountry": "IN"
     },
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Hinjewadi IT Park", "value": "4.5 km / 10 mins" },
+      { "@type": "LocationFeatureSpecification", "name": "Balewadi High Street", "value": "12 mins drive" },
+      { "@type": "LocationFeatureSpecification", "name": "Mumbai-Pune Expressway", "value": "Direct Access" },
+      { "@type": "LocationFeatureSpecification", "name": "Pune Metro Line 3", "value": "Upcoming" },
+      { "@type": "LocationFeatureSpecification", "name": "International Schools", "value": "Walking Distance" }
+    ],
     "areaServed": [
       { "@type": "City", "name": "Pune" },
       { "@type": "Place", "name": "Mahalunge" },

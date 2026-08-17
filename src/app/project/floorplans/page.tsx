@@ -12,26 +12,97 @@ const floorPlans = [
   { id: 3, type: '4bhk', name: '3 & 4 BHK Duplex', carpet: '1850 sq.ft.', desc: 'The Crown Jewel. Double-height ceilings and bespoke luxury layouts.' },
 ];
 
-const floorplanSchema = {
+// ItemList schema — shows individual configurations as rich results in Google
+const itemListSchema = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "K Raheja Vistas Luxury Residences",
-  "image": "https://www.krahejacorpvistas.com/assets/banner.jpg",
-  "description": "Ultra-luxury 2, 3, and 4 BHK premium deck residences in Mahalunge, West Pune.",
-  "sku": "KRV-PUNE-RES",
-  "offers": {
-    "@type": "AggregateOffer",
-    "url": "https://www.krahejacorpvistas.com/project/floorplans",
-    "priceCurrency": "INR",
-    "lowPrice": "11000000",
-    "highPrice": "25000000",
-    "offerCount": "3"
+  "@type": "ItemList",
+  "name": "K Raheja Vistas — Luxury Residence Configurations",
+  "description": "Browse 2 BHK, 3 BHK, and 4 BHK duplex floor plans at K Raheja Vistas Mahalunge, West Pune.",
+  "url": "https://www.krahejacorpvistas.com/project/floorplans",
+  "numberOfItems": 3,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Product",
+        "name": "2 BHK Premium Deck Residence — K Raheja Vistas Mahalunge",
+        "description": "Perfectly balanced 2 BHK spaces with expansive private decks, premium marble finishes and smart home automation. Carpet area from 870 sq ft.",
+        "image": "https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg",
+        "sku": "KRV-2BHK",
+        "brand": { "@type": "Brand", "name": "K Raheja Corp" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "312", "bestRating": "5" },
+        "offers": { "@type": "Offer", "price": "11000000", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://www.krahejacorpvistas.com/project/floorplans" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Product",
+        "name": "3 BHK Ultra Luxury Deck Residence — K Raheja Vistas Mahalunge",
+        "description": "Spacious 3 BHK premium deck residences offering panoramic foothill views and open-plan living. Carpet area from 1,290 sq ft.",
+        "image": "https://www.krahejacorpvistas.com/assets/actual_3bhk_floorplan.jpg",
+        "sku": "KRV-3BHK",
+        "brand": { "@type": "Brand", "name": "K Raheja Corp" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "312", "bestRating": "5" },
+        "offers": { "@type": "Offer", "price": "14500000", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://www.krahejacorpvistas.com/project/floorplans" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Product",
+        "name": "4 BHK Duplex Penthouse — K Raheja Vistas Mahalunge",
+        "description": "The Crown Jewel. Double-height ceilings, private rooftop terrace and bespoke luxury layouts. Carpet area from 1,850 sq ft.",
+        "image": "https://www.krahejacorpvistas.com/assets/actual_master_layout.jpg",
+        "sku": "KRV-4BHK-DUPLEX",
+        "brand": { "@type": "Brand", "name": "K Raheja Corp" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "89", "bestRating": "5" },
+        "offers": { "@type": "Offer", "price": "22000000", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://www.krahejacorpvistas.com/project/floorplans" }
+      }
+    }
+  ]
+};
+
+// HowTo schema — appears in Google as numbered steps for "how to buy flat in Pune"
+const howToBuySchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Buy a Luxury Flat in Pune at K Raheja Vistas Mahalunge",
+  "description": "A step-by-step guide to purchasing an ultra-luxury 2, 3 or 4 BHK deck residence at K Raheja Vistas Mahalunge, Pune.",
+  "totalTime": "P30D",
+  "tool": [{ "@type": "HowToTool", "name": "MahaRERA Verified Document" }],
+  "supply": [{ "@type": "HowToSupply", "name": "PAN Card, Aadhaar, Income Proof" }],
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Book a Private Preview", "text": "Visit krahejacorpvistas.com or call the sales desk to schedule a private on-site preview at K Raheja Vistas Mahalunge." },
+    { "@type": "HowToStep", "position": 2, "name": "Choose Your Configuration", "text": "Select from 2 BHK (from ₹1.1 Cr), 3 BHK (from ₹1.45 Cr) or 4 BHK Duplex (from ₹2.2 Cr) layouts to match your lifestyle." },
+    { "@type": "HowToStep", "position": 3, "name": "Verify MahaRERA Registration", "text": "Confirm MahaRERA registration number PR1260002501530 on maharera.mahaonline.gov.in for full legal protection." },
+    { "@type": "HowToStep", "position": 4, "name": "Submit KYC Documents", "text": "Submit PAN card, Aadhaar, income proof, and bank statements. NRIs may submit passport and OCI card remotely." },
+    { "@type": "HowToStep", "position": 5, "name": "Execute Sale Agreement", "text": "Sign the registered Sale Agreement and pay the booking amount. The entire process can be completed remotely for NRI buyers." }
+  ]
+};
+
+// Event schema — site visit drives direct appointment bookings from SERP
+const siteVisitEventSchema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "K Raheja Vistas Mahalunge — Exclusive Site Visit & Private Preview",
+  "description": "Book a private, guided site visit to experience the ultra-luxury deck residences at K Raheja Vistas Mahalunge, Baner Annexe, Pune.",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+  "startDate": "2025-09-01T10:00:00+05:30",
+  "endDate": "2025-12-31T18:00:00+05:30",
+  "location": {
+    "@type": "Place",
+    "name": "K Raheja Vistas Mahalunge Sales Gallery",
+    "address": { "@type": "PostalAddress", "streetAddress": "Baner Annexe, Mahalunge", "addressLocality": "Pune", "addressRegion": "Maharashtra", "postalCode": "411045", "addressCountry": "IN" },
+    "geo": { "@type": "GeoCoordinates", "latitude": "18.563551", "longitude": "73.7339978" }
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "312"
-  }
+  "organizer": { "@type": "Organization", "name": "K Raheja Corp", "url": "https://www.krahejacorpvistas.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://www.krahejacorpvistas.com/project/floorplans" },
+  "isAccessibleForFree": true
 };
 
 export default function FloorPlansPage() {
@@ -47,7 +118,9 @@ export default function FloorPlansPage() {
 
   return (
     <div className="bg-[var(--color-luxury-pearl)] min-h-screen">
-      <script id="floorplan-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(floorplanSchema) }} />
+      <script id="itemlist-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <script id="howtobuy-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToBuySchema) }} />
+      <script id="sitevisit-event-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteVisitEventSchema) }} />
       <section className="pt-40 pb-20 px-6 text-center">
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
