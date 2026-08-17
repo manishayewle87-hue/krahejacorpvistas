@@ -21,7 +21,7 @@ export default function Footer() {
                 <h4 className="text-white font-serif mb-4">Location Map</h4>
                 <div className="w-full h-40 rounded-lg overflow-hidden border border-white/10 shadow-lg">
                   <iframe 
-                    src="https://maps.google.com/maps?q=Raheja+Vistas,+Baner+Annex&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    src="https://maps.google.com/maps?q=18.563551,73.7339978&t=&z=17&ie=UTF8&iwloc=&output=embed" 
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 

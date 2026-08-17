@@ -122,8 +122,8 @@ export function generateRealEstateListingSchema(title: string, description: stri
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: "18.5721",
-        longitude: "73.7432"
+        latitude: "18.563551",
+        longitude: "73.7339978"
       }
     },
     offers: {
