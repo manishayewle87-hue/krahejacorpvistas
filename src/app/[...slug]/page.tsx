@@ -184,12 +184,12 @@ export default async function ProgrammaticLandingPage(props: Props) {
                     },
                     "geo": {
                       "@type": "GeoCoordinates",
-                      "latitude": "18.5721",
-                      "longitude": "73.7432"
+                      "latitude": "18.563551",
+                      "longitude": "73.7339978"
                     },
                     "areaServed": [
                       { "@type": "City", "name": "Pune" },
-                      { "@type": "Place", "name": "Mahalunge", "geo": { "@type": "GeoCoordinates", "latitude": "18.5721", "longitude": "73.7432" }},
+                      { "@type": "Place", "name": "Mahalunge", "geo": { "@type": "GeoCoordinates", "latitude": "18.563551", "longitude": "73.7339978" }},
                       { "@type": "Place", "name": "Baner Annexe", "geo": { "@type": "GeoCoordinates", "latitude": "18.5590", "longitude": "73.7721" }},
                       { "@type": "Place", "name": "Hinjewadi IT Park", "geo": { "@type": "GeoCoordinates", "latitude": "18.5912", "longitude": "73.7389" }},
                       { "@type": "Place", "name": "Balewadi High Street", "geo": { "@type": "GeoCoordinates", "latitude": "18.5666", "longitude": "73.7765" }},
