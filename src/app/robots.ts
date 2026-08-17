@@ -4,19 +4,35 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        // Googlebot gets full, unrestricted access for maximum crawl coverage
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin/', '/portal/', '/api/'],
+      },
+      {
+        // Bing gets full access for secondary search coverage
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/admin/', '/portal/', '/api/'],
+      },
+      {
+        // All other bots get crawl-budget-optimized rules
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/private/', 
-          '/admin/', 
+          '/private/',
+          '/admin/',
           '/portal/',
-          '/*?utm_*',        // Block tracking params to save crawl budget
-          '/*?fbclid=*',     // Block Facebook click IDs
-          '/*?sort=*',       // Block duplicate sort parameters
-          '/*?filter=*',     // Block duplicate filter parameters
-          '/*&*',            // Block complex query chains
+          '/api/',
+          '/*?utm_*',
+          '/*?fbclid=*',
+          '/*?gclid=*',
+          '/*?sort=*',
+          '/*?filter=*',
+          '/*&*',
+          '/*.json$',
         ],
-        crawlDelay: 1, // Be polite to the edge server while serving 54K routes
+        crawlDelay: 2,
       }
     ],
     sitemap: [

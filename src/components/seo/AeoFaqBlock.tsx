@@ -36,6 +36,22 @@ const VOICE_FAQS = [
   {
     question: "Is K Raheja Vistas the best K Raheja Corp project in Pune?",
     answer: "K Raheja Vistas Mahalunge is widely considered one of the flagship K Raheja Corp projects in Pune. Building on the legacy of K Raheja Corp's commercial and residential excellence across India, this 7.5-acre development represents the pinnacle of luxury living in Pune West."
+  },
+  {
+    question: "What is the possession date for K Raheja Vistas Mahalunge?",
+    answer: "K Raheja Vistas Mahalunge is registered under MahaRERA No. PR1260002501530. For the latest possession timeline, please contact the official sales team or refer to the MahaRERA portal at maharera.mahaonline.gov.in."
+  },
+  {
+    question: "How far is K Raheja Vistas from Hinjewadi IT Park?",
+    answer: "K Raheja Vistas Mahalunge is approximately 4.5 km from Hinjewadi Phase 1, making it a prime choice for IT professionals. The daily commute takes under 10 minutes without traffic, giving residents unparalleled work-life balance."
+  },
+  {
+    question: "What is the size of 2 BHK and 3 BHK in K Raheja Vistas?",
+    answer: "K Raheja Vistas offers 2 BHK residences starting from 870 sq ft and 3 BHK deck residences starting from 1,290 sq ft. Each home features a private deck, premium marble finishes, and smart home automation as standard."
+  },
+  {
+    question: "Is there a Pune Metro connection near K Raheja Vistas?",
+    answer: "Yes. The upcoming Pune Metro Line 3 (Hinjewadi–Shivajinagar corridor) will have a station within close proximity to K Raheja Vistas Mahalunge, significantly enhancing connectivity and driving further capital appreciation in the micro-market."
   }
 ];
 

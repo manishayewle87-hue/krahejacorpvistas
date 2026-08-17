@@ -12,22 +12,30 @@ export function middleware(request: NextRequest) {
   const userAgentLower = userAgent.toLowerCase();
   
   // 1. Block Scripting Agents & Scanners
-  const blockedTools = ['curl', 'wget', 'python-requests', 'libwww-perl', 'go-http-client', 'java', 'nmap', 'sqlmap', 'zgrab'];
+  const blockedTools = ['curl', 'wget', 'python-requests', 'python-urllib', 'libwww-perl', 'go-http-client', 'java/', 'nmap', 'sqlmap', 'zgrab', 'masscan', 'nikto', 'dirbuster', 'nuclei'];
   const isBlockedTool = blockedTools.some(tool => userAgentLower.includes(tool));
 
-  // 2. Block SEO Scrapers & Malicious Bots
-  const blockedBots = ['ahrefsbot', 'semrushbot', 'mj12bot', 'dotbot', 'petalbot', 'baiduspider', 'yandexbot', 'megaindex', 'blexbot', 'screaming frog'];
+  // 2. Block SEO Scrapers, Malicious Bots & Unauthorized AI Crawlers
+  const blockedBots = [
+    'ahrefsbot', 'semrushbot', 'mj12bot', 'dotbot', 'petalbot', 'baiduspider',
+    'yandexbot', 'megaindex', 'blexbot', 'screaming frog', 'seokicks',
+    'majestic', 'rogerbot', 'exabot', 'gigabot', 'scrapy', 'wget',
+    'ia_archiver', 'facebookexternalhit',
+    // AI Content Scrapers (unauthorized training crawlers)
+    'gptbot', 'chatgpt-user', 'anthropic-ai', 'claude-web', 'cohere-ai',
+    'ccbot', 'commoncrawl', 'diffbot', 'bytespider', 'omgili'
+  ];
   const isBlockedBot = blockedBots.some(bot => userAgentLower.includes(bot));
 
   // 3. Block Headless Browsers
-  const isHeadless = userAgentLower.includes('headless') || userAgentLower.includes('puppeteer') || userAgentLower.includes('playwright');
+  const isHeadless = userAgentLower.includes('headless') || userAgentLower.includes('puppeteer') || userAgentLower.includes('playwright') || userAgentLower.includes('phantomjs');
 
   // 4. Block Vulnerability Scans (Heuristics)
   const pathnameLower = pathname.toLowerCase();
-  const isMaliciousPath = pathnameLower.includes('.env') || pathnameLower.includes('wp-admin') || pathnameLower.includes('wp-login') || pathnameLower.includes('.git') || pathnameLower.includes('union') || pathnameLower.includes('select');
+  const isMaliciousPath = pathnameLower.includes('.env') || pathnameLower.includes('wp-admin') || pathnameLower.includes('wp-login') || pathnameLower.includes('.git') || pathnameLower.includes('union') || pathnameLower.includes('select') || pathnameLower.includes('../') || pathnameLower.includes('etc/passwd') || pathnameLower.includes('xmlrpc');
 
   if (isBlockedTool || isBlockedBot || isHeadless || isMaliciousPath || !userAgent || userAgent.trim() === '') {
-    return new NextResponse('Access Denied: Digital Fortress Firewall', { status: 403 });
+    return new NextResponse('Access Denied', { status: 403, headers: { 'X-Block-Reason': 'Digital-Fortress-WAF' } });
   }
 
   // Edge Personalization (Phase 8.3)
