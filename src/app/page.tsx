@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   }
 };
 
+export const revalidate = 86400; // 24 hours ISR edge cache
+
 export default async function Home() {
   const headersList = await headers();
   const city = headersList.get('x-user-city') || 'Unknown';

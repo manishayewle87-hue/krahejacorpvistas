@@ -41,6 +41,32 @@ export async function submitLead(data: {
       geoCity: city,
     });
 
+    // 🚀 Fire CRM Webhook (Fallback/Enterprise Sync)
+    const webhookUrl = process.env.CRM_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'new_lead',
+            source: 'K Raheja Vistas Website',
+            data: {
+              name: data.name,
+              email: data.email,
+              phone: data.phone,
+              configuration: data.configuration,
+              city: city,
+              referer: referer
+            }
+          }),
+        });
+      } catch (webhookError) {
+        // Silently log webhook failures so we don't break the user experience
+        console.error('[CRM Webhook Error] Failed to sync to external CRM:', webhookError);
+      }
+    }
+
     return { success: true, leadId: lead.id };
   } catch (error) {
     console.error('[CRM Error] Failed to submit lead:', error);

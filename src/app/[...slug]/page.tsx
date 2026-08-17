@@ -61,6 +61,9 @@ export function generateStaticParams() {
   }));
 }
 
+export const revalidate = 86400; // 24 hours ISR edge cache
+export const dynamicParams = true;
+
 export default async function ProgrammaticLandingPage(props: Props) {
   const params = await props.params;
   const slugKey = params.slug.join('/');
