@@ -25,19 +25,24 @@ const ALLOWED_BOT_SUBSTRINGS = [
   'acme-challenge',
   'certbot',
   'vercel',
+  'perplexity',
+  'chatgpt',
+  'claude',
 ];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 0. SSL Certificate Generation & ACME http-01 Challenge Pass-through (Critical for Vercel/Let's Encrypt)
+  // 0. Instant Pass-through for Critical SEO, Sitemaps, Robots, LLM discovery, and SSL challenges
   if (
     pathname.startsWith('/.well-known') ||
     pathname.includes('acme-challenge') ||
     pathname.endsWith('robots.txt') ||
     pathname.endsWith('sitemap.xml') ||
     pathname.includes('/sitemaps/') ||
-    pathname === '/default-indexnow-key.txt'
+    pathname === '/default-indexnow-key.txt' ||
+    pathname === '/llms.txt' ||
+    pathname.startsWith('/llms.txt')
   ) {
     return NextResponse.next();
   }
@@ -59,9 +64,8 @@ export function middleware(request: NextRequest) {
       'megaindex', 'blexbot', 'screaming frog', 'seokicks',
       'majestic', 'rogerbot', 'exabot', 'gigabot', 'scrapy',
       'ia_archiver', 'facebookexternalhit',
-      // AI Content Scrapers (unauthorized training crawlers)
-      'gptbot', 'chatgpt-user', 'anthropic-ai', 'claude-web', 'claudebot', 'cohere-ai',
-      'perplexitybot', 'google-extended', 'ccbot', 'commoncrawl', 'diffbot', 'bytespider', 'omgili'
+      // AI Dataset Harvesters (unauthorized training scrapers)
+      'ccbot', 'commoncrawl', 'diffbot', 'bytespider', 'omgili'
     ];
     const isBlockedBot = blockedBots.some(bot => userAgentLower.includes(bot));
 
@@ -142,6 +146,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Run middleware on application routes, strictly excluding static assets, ACME challenges, and sitemaps
   matcher: [
-    '/((?!api|_next/static|_next/image|assets|favicon.ico|\\.well-known|robots\\.txt|sitemap\\.xml|sitemaps|default-indexnow-key\\.txt).*)',
+    '/((?!api|_next/static|_next/image|assets|favicon.ico|\\.well-known|robots\\.txt|sitemap\\.xml|sitemaps|default-indexnow-key\\.txt|llms\\.txt).*)',
   ],
 };
