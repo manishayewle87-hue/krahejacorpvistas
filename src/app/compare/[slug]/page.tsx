@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
-export const dynamic = 'force-dynamic';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Script from 'next/script';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { CheckCircle2, XCircle, MinusCircle } from 'lucide-react';
 import Image from 'next/image';
+
+export const revalidate = 86400; // 24 hours ISR edge cache
 
 type CompareRow = { label: string; krv: string; competitor: string; krvWins: boolean | 'tie' };
 
@@ -28,7 +29,7 @@ const COMPARISONS: Record<string, {
       { label: 'Clubhouse', krv: 'Twin Clubhouses', competitor: 'Single Clubhouse', krvWins: true },
       { label: 'Starting Price', krv: '₹1.10 Cr', competitor: '₹1.25 Cr', krvWins: true },
       { label: 'MahaRERA', krv: 'PR1260002501530', competitor: 'Registered', krvWins: 'tie' },
-      { label: 'Developer Track Record', krv: '5 Decades, Pan-India', competitor: '3 Decades, Pan-India', krvWins: true },
+      { label: 'Developer Track Record', krv: '65+ Years, Pan-India', competitor: '30+ Years, Pan-India', krvWins: true },
       { label: 'Smart Home', krv: '✓ Standard', competitor: 'Premium Add-on', krvWins: true },
       { label: 'Hinjewadi Distance', krv: '4.5 km', competitor: '6 km', krvWins: true },
     ]
@@ -47,7 +48,7 @@ const COMPARISONS: Record<string, {
       { label: 'Infinity Pool', krv: 'Temperature Controlled', competitor: 'Standard Pool', krvWins: true },
       { label: 'Starting Price', krv: '₹1.10 Cr', competitor: '₹98 Lakh', krvWins: false },
       { label: 'MahaRERA', krv: 'PR1260002501530', competitor: 'Registered', krvWins: 'tie' },
-      { label: 'Possession', krv: 'On Schedule', competitor: 'On Schedule', krvWins: 'tie' },
+      { label: 'Possession', krv: 'On Schedule (2026)', competitor: 'On Schedule', krvWins: 'tie' },
       { label: 'Smart Home', krv: '✓ Standard', competitor: '✗ Optional', krvWins: true },
       { label: 'Brand Pedigree', krv: 'K Raheja Corp', competitor: 'Rohan Builders', krvWins: true },
     ]
@@ -59,14 +60,13 @@ const COMPARISONS: Record<string, {
     competitor: 'Kolte Patil Life Republic',
     competitorLocation: 'Wakad-Hinjewadi, Pune',
     rows: [
-      { label: 'Project Type', krv: 'Ultra-Luxury Gated', competitor: 'Premium Township', krvWins: true },
-      { label: 'Land Area', krv: '7.5 Acres', competitor: '140 Acres', krvWins: false },
-      { label: 'Exclusivity', krv: '650 Units Only', competitor: '5000+ Units', krvWins: true },
-      { label: 'Deck Residences', krv: '✓ All Homes', competitor: '✗ Not Available', krvWins: true },
-      { label: 'Clubhouses', krv: 'Twin Luxury Clubs', competitor: 'Multiple Basic', krvWins: true },
-      { label: 'Starting Price', krv: '₹1.10 Cr', competitor: '₹75 Lakh', krvWins: false },
-      { label: 'Appreciation (5yr)', krv: '18% YoY (Mahalunge)', competitor: '12% YoY (Wakad)', krvWins: true },
-      { label: 'Rental Yield', krv: '4–6% PA', competitor: '3–4% PA', krvWins: true },
+      { label: 'Micro-Market', krv: 'Baner Annexe / Mahalunge', competitor: 'Marunji / Hinjewadi Ph 2', krvWins: true },
+      { label: 'Land Area', krv: '7.5 Acres Integrated', competitor: 'Large Township', krvWins: 'tie' },
+      { label: 'Density', krv: 'Low Density (650 Units)', competitor: 'High Density (5000+ Units)', krvWins: true },
+      { label: 'Deck Architecture', krv: 'Private Decks on All Units', competitor: 'Standard Balconies', krvWins: true },
+      { label: 'Starting Price', krv: '₹1.10 Cr', competitor: '₹85 Lakh', krvWins: false },
+      { label: 'Balewadi High Street', krv: '2 km (5 mins)', competitor: '9 km (25 mins)', krvWins: true },
+      { label: 'Rental Yield', krv: '4–6% pa', competitor: '3.5–4% pa', krvWins: true },
       { label: 'MahaRERA', krv: 'PR1260002501530', competitor: 'Registered', krvWins: 'tie' },
       { label: 'Hinjewadi Distance', krv: '4.5 km', competitor: '2 km', krvWins: false },
     ]
@@ -104,6 +104,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: data.title,
     description: data.description,
     alternates: { canonical: `https://www.krahejacorpvistas.com/compare/${slug}` },
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      url: `https://www.krahejacorpvistas.com/compare/${slug}`,
+      images: [{ url: '/assets/banner.jpg', width: 1200, height: 630, alt: data.h1 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data.title,
+      description: data.description,
+      images: ['/assets/banner.jpg'],
+    },
   };
 }
 
@@ -129,76 +141,91 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Compare', href: '/compare/best-projects-in-mahalunge' },
-    { label: data.h1.split('—')[0].trim(), href: `/compare/${slug}` }
+    { label: 'Compare Projects', href: '/compare' },
+    { label: data.h1, href: `/compare/${slug}` }
   ];
 
   return (
-    <div className="bg-[var(--color-luxury-charcoal)] min-h-screen">
-      <Script id="table-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(tableSchema) }} />
+    <div className="min-h-screen bg-[var(--color-luxury-charcoal)] pt-32 pb-24 px-6">
+      <Script id="compare-table-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(tableSchema) }} />
 
-      {/* Hero */}
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image src="/assets/actual_master_layout.jpg" alt={data.h1} fill className="object-cover opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[var(--color-luxury-charcoal)]" />
-        </div>
-        <div className="relative z-10 text-center px-6 mt-16">
-          <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs font-semibold block mb-4">Side-by-Side Analysis</span>
-          <h1 className="text-3xl md:text-5xl font-serif text-[var(--color-luxury-pearl)] font-light leading-tight max-w-4xl mx-auto">{data.h1}</h1>
-        </div>
-      </div>
-
-      <div className="container mx-auto max-w-5xl px-6 pb-20">
+      <div className="container mx-auto max-w-5xl">
         <Breadcrumbs items={breadcrumbs} />
 
-        {/* Score Summary */}
-        <div className="grid grid-cols-3 gap-6 my-12 text-center">
-          <div className="glass-panel p-8 rounded-2xl border border-[var(--color-luxury-gold)]/30 bg-[var(--color-luxury-gold)]/5">
-            <p className="text-5xl font-serif text-[var(--color-luxury-gold)]">{wins}</p>
-            <p className="text-white/60 text-sm mt-2 uppercase tracking-wider">K Raheja Wins</p>
-          </div>
-          <div className="glass-panel p-8 rounded-2xl border border-white/10">
-            <p className="text-5xl font-serif text-white/60">{ties}</p>
-            <p className="text-white/40 text-sm mt-2 uppercase tracking-wider">Tie</p>
-          </div>
-          <div className="glass-panel p-8 rounded-2xl border border-white/10">
-            <p className="text-5xl font-serif text-white/40">{data.rows.length - wins - ties}</p>
-            <p className="text-white/40 text-sm mt-2 uppercase tracking-wider">{data.competitor.split(' ')[0]} Wins</p>
+        {/* Hero */}
+        <div className="text-center mb-16">
+          <span className="text-[var(--color-luxury-gold)] tracking-[0.4em] uppercase text-xs font-semibold block mb-4">
+            Independent Real Estate Analysis
+          </span>
+          <h1 className="text-3xl md:text-5xl font-serif text-[var(--color-luxury-pearl)] font-light leading-tight mb-6 max-w-4xl mx-auto">
+            {data.h1}
+          </h1>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed">
+            {data.description}
+          </p>
+
+          {/* Win Score Banner */}
+          <div className="mt-8 inline-flex items-center gap-4 bg-[var(--color-luxury-gold)]/10 border border-[var(--color-luxury-gold)]/30 px-6 py-3 rounded-full text-sm">
+            <span className="text-[var(--color-luxury-gold)] font-bold">K Raheja Vistas Advantage:</span>
+            <span className="text-white">Ahead in <strong>{wins}</strong> out of {data.rows.length} categories ({ties} tied)</span>
           </div>
         </div>
 
         {/* Comparison Table */}
-        <div className="glass-panel rounded-2xl overflow-hidden border border-white/10">
-          <div className="grid grid-cols-3 bg-black/50 p-6 border-b border-white/10">
-            <div className="text-white/40 text-xs uppercase tracking-widest">Feature</div>
-            <div className="text-[var(--color-luxury-gold)] text-sm font-serif font-medium text-center">K Raheja Vistas</div>
-            <div className="text-white/60 text-sm text-center">{data.competitor}</div>
+        <div className="glass-panel rounded-2xl border border-white/10 overflow-hidden mb-16 shadow-2xl">
+          <div className="grid grid-cols-3 bg-white/5 border-b border-white/10 p-5 text-sm font-semibold tracking-wider uppercase">
+            <div className="text-white/50">Feature / Metric</div>
+            <div className="text-[var(--color-luxury-gold)] text-center font-bold">K Raheja Vistas</div>
+            <div className="text-white/60 text-center">{data.competitor}</div>
           </div>
-          {data.rows.map((row, i) => (
-            <div key={i} className={`grid grid-cols-3 p-5 border-b border-white/5 items-center hover:bg-white/5 transition-colors ${row.krvWins === true ? 'bg-[var(--color-luxury-gold)]/[0.02]' : ''}`}>
-              <p className="text-white/60 text-sm">{row.label}</p>
-              <div className="flex items-center justify-center gap-2">
-                {row.krvWins === true && <CheckCircle2 className="w-4 h-4 text-[var(--color-luxury-gold)] flex-shrink-0" />}
-                {row.krvWins === 'tie' && <MinusCircle className="w-4 h-4 text-white/40 flex-shrink-0" />}
-                {row.krvWins === false && <XCircle className="w-4 h-4 text-white/30 flex-shrink-0" />}
-                <span className={`text-sm font-medium text-center ${row.krvWins === true ? 'text-[var(--color-luxury-gold)]' : 'text-white/80'}`}>{row.krv}</span>
+
+          <div className="divide-y divide-white/5">
+            {data.rows.map((row, idx) => (
+              <div key={idx} className={`grid grid-cols-3 p-5 text-sm items-center transition-colors ${row.krvWins === true ? 'bg-[var(--color-luxury-gold)]/5 hover:bg-[var(--color-luxury-gold)]/10' : 'hover:bg-white/5'}`}>
+                <div className="text-white/80 font-medium flex items-center gap-2">
+                  {row.krvWins === true && <CheckCircle2 className="w-4 h-4 text-[var(--color-luxury-gold)] flex-shrink-0" />}
+                  {row.krvWins === false && <XCircle className="w-4 h-4 text-red-400 flex-shrink-0" />}
+                  {row.krvWins === 'tie' && <MinusCircle className="w-4 h-4 text-white/40 flex-shrink-0" />}
+                  {row.label}
+                </div>
+                <div className="text-center font-semibold text-white">
+                  <span className={row.krvWins === true ? 'text-[var(--color-luxury-gold)]' : 'text-white'}>{row.krv}</span>
+                </div>
+                <div className="text-center text-white/60">
+                  {row.competitor}
+                </div>
               </div>
-              <p className="text-white/50 text-sm text-center">{row.competitor}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Verdict */}
-        <div className="mt-12 glass-panel p-10 rounded-2xl border border-[var(--color-luxury-gold)]/20 text-center">
-          <h2 className="text-3xl font-serif text-[var(--color-luxury-pearl)] mb-4">The Verdict</h2>
-          <p className="text-white/70 leading-relaxed max-w-2xl mx-auto mb-8">
-            K Raheja Vistas Mahalunge wins {wins} out of {data.rows.length} parameters — making it the clear choice for discerning buyers seeking ultra-luxury living with superior investment potential in West Pune.
-          </p>
-          <Link href="/" className="inline-block px-10 py-4 bg-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">
-            Explore K Raheja Vistas
-          </Link>
+        {/* Other Comparisons */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-serif text-[var(--color-luxury-pearl)] mb-6">Explore Other Project Comparisons</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {Object.entries(COMPARISONS).filter(([k]) => k !== slug).map(([key, item]) => (
+              <Link key={key} href={`/compare/${key}`} className="glass-panel p-5 rounded-xl border border-white/10 hover:border-[var(--color-luxury-gold)] transition-colors block group">
+                <p className="text-white font-medium group-hover:text-[var(--color-luxury-gold)] transition-colors text-sm mb-2">{item.h1}</p>
+                <span className="text-[var(--color-luxury-gold)] text-xs font-semibold">View Comparison &rarr;</span>
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {/* CTA */}
+        <div className="text-center glass-panel p-12 rounded-3xl border border-[var(--color-luxury-gold)]/20 bg-[var(--color-luxury-gold)]/5">
+          <h2 className="text-3xl font-serif text-[var(--color-luxury-pearl)] mb-4">Experience the K Raheja Vistas Advantage</h2>
+          <p className="text-white/60 mb-8 max-w-xl mx-auto">Book a private site visit and experience Pune&apos;s finest deck residences with your own eyes.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+917744009295" className="px-10 py-4 bg-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">
+              Schedule Site Visit (+91 77440 09295)
+            </a>
+            <Link href="/project/floorplans" className="px-10 py-4 border border-white/30 text-white font-bold uppercase tracking-widest text-sm hover:border-[var(--color-luxury-gold)] hover:text-[var(--color-luxury-gold)] transition-colors">
+              View Floor Plans
+            </Link>
+          </div>
+        </div>
+
       </div>
     </div>
   );

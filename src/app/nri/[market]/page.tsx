@@ -32,9 +32,19 @@ export function generateMetadata({ params }: { params: { market: string } }): Me
   return {
     title: data.title,
     description: data.description,
+    keywords: [
+      `NRI property investment ${data.city}`,
+      `K Raheja Vistas NRI ${data.city}`,
+      `buy flat in Pune from ${data.country}`,
+      'luxury apartments Pune NRI',
+      'MahaRERA PR1260002501530',
+      'Pune real estate capital appreciation',
+    ],
     alternates: {
       canonical: `https://www.krahejacorpvistas.com/nri/${params.market}`,
       languages: {
+        'en-IN': `https://www.krahejacorpvistas.com/`,
+        'en': `https://www.krahejacorpvistas.com/`,
         [data.locale]: `https://www.krahejacorpvistas.com/nri/${params.market}`,
         'x-default': `https://www.krahejacorpvistas.com/`,
       },
@@ -42,7 +52,23 @@ export function generateMetadata({ params }: { params: { market: string } }): Me
     openGraph: {
       title: data.title,
       description: data.description,
-    }
+      url: `https://www.krahejacorpvistas.com/nri/${params.market}`,
+      images: [
+        {
+          url: '/assets/banner.jpg',
+          width: 1200,
+          height: 630,
+          alt: `K Raheja Vistas Mahalunge — NRI Investment from ${data.city}`,
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data.title,
+      description: data.description,
+      images: ['/assets/banner.jpg'],
+    },
   };
 }
 
@@ -52,10 +78,10 @@ const NRI_MARKETS = {
     headline: 'Invest in Pune\'s Most Coveted Address from Dubai',
     subheadline: 'Repatriate wealth, secure your family\'s future, and build a legacy back home.',
     benefits: [
-      'Fully FEMA-compliant NRI purchase process',
-      'Dedicated NRI Relationship Manager in Dubai',
-      '18% YoY appreciation in Mahalunge micro-market',
-      'Rental yields of 4-6% pa from Hinjewadi IT professionals'
+      'Fully FEMA-compliant NRI purchase process with remote documentation',
+      'Dedicated NRI Relationship Manager in Dubai & Middle East timezone',
+      '18% YoY capital appreciation track record in Mahalunge micro-market',
+      '4–6% rental yields driven by Hinjewadi IT Park (300,000+ tech workforce)'
     ]
   },
   'luxury-homes-pune-for-nri-uk': {
@@ -63,10 +89,10 @@ const NRI_MARKETS = {
     headline: 'Own Ultra-Luxury Property in Pune from the UK',
     subheadline: 'Favourable INR-GBP exchange rates make this the ideal moment to invest.',
     benefits: [
-      'Online virtual property tours available',
-      'Full legal documentation handled remotely',
-      'DTAA benefits available for UK-based NRIs',
-      'Dedicated UK timezone support line'
+      'Virtual 3D property walkthroughs and live video inspection',
+      'End-to-end legal title verification and MahaRERA buyer protection',
+      'DTAA tax treaty benefits available for UK-based Indian investors',
+      'Dedicated UK timezone customer desk with instant query resolution'
     ]
   },
   'best-nri-investment-pune-singapore': {
@@ -74,21 +100,21 @@ const NRI_MARKETS = {
     headline: 'Pune\'s #1 NRI Investment Opportunity for Singapore Residents',
     subheadline: 'Diversify beyond Singapore REITs with direct ownership of ultra-premium Indian real estate.',
     benefits: [
-      'Strong INR-SGD currency arbitrage advantage',
-      'Seamless NRI loan processing via HDFC & SBI',
-      'MahaRERA guarantee — complete legal protection',
-      'Singapore NRI community site visits organized quarterly'
+      'Strong INR-SGD currency arbitrage advantage and high ROI',
+      'Pre-approved home loans with leading banks (HDFC, SBI, ICICI)',
+      'MahaRERA registration PR1260002501530 guarantees timely delivery',
+      'Direct connectivity to Pune Metro Line 3 and Mumbai-Pune Expressway'
     ]
   },
   'pune-real-estate-investment-for-nri-usa': {
     city: 'United States', flag: '🇺🇸', currency: 'USD',
     headline: 'From Silicon Valley to K Raheja Vistas Mahalunge',
-    subheadline: 'The smartest NRIs from the Bay Area and New York are already invested. Are you?',
+    subheadline: 'The smartest NRIs from the Bay Area, Seattle, and New York are already invested. Are you?',
     benefits: [
-      'USD wire transfer support via NRE/NRO accounts',
-      'Virtual property tours across all US time zones',
-      'Capital gains repatriation fully compliant with IRS rules',
-      'Hinjewadi IT corridor — familiar territory for US tech NRIs'
+      'USD wire transfer support via NRE/NRO banking channels',
+      'Virtual consultations scheduled across all US time zones (PST/EST/CST)',
+      'Capital gains repatriation fully compliant with FEMA & IRS rules',
+      'Proximity to Hinjewadi IT corridor — home to 200+ global tech majors'
     ]
   }
 };
@@ -100,9 +126,8 @@ export async function generateStaticParams() {
 export default function NriLandingPage({ params }: { params: { market: string } }) {
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "NRI Market", href: "/nri" }
+    { label: "NRI Investment Hub", href: "/nri/invest-in-pune-real-estate-from-dubai" }
   ];
-
 
   const market = NRI_MARKETS[params.market as keyof typeof NRI_MARKETS] || NRI_MARKETS['invest-in-pune-real-estate-from-dubai'];
 
@@ -110,7 +135,7 @@ export default function NriLandingPage({ params }: { params: { market: string } 
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
     "name": `K Raheja Vistas Mahalunge — NRI Investment from ${market.city}`,
-    "description": `Ultra-luxury residences at K Raheja Vistas Mahalunge for NRI investors based in ${market.city}. MahaRERA Registered.`,
+    "description": `Ultra-luxury residences at K Raheja Vistas Mahalunge for NRI investors based in ${market.city}. MahaRERA Registered: PR1260002501530.`,
     "url": `https://www.krahejacorpvistas.com/nri/${params.market}`,
     "inLanguage": "en",
     "audience": { "@type": "Audience", "audienceType": `Non-Resident Indians in ${market.city}` },
@@ -118,7 +143,12 @@ export default function NriLandingPage({ params }: { params: { market: string } 
       "@type": "Offer",
       "price": "11000000",
       "priceCurrency": "INR",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "RealEstateAgent",
+        "name": "K Raheja Corp",
+        "telephone": "+91-7744009295"
+      }
     }
   };
 
@@ -142,13 +172,13 @@ export default function NriLandingPage({ params }: { params: { market: string } 
         {/* Project Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[
-            { label: 'Acres', value: '7.5' },
-            { label: 'Premium Towers', value: '7' },
-            { label: 'Residences', value: '650' },
-            { label: 'MahaRERA', value: '✓' },
+            { label: 'Master Development', value: '7.5 Acres' },
+            { label: 'Towers', value: '7 High-Rise' },
+            { label: 'Residences', value: '650 Deck Homes' },
+            { label: 'MahaRERA Reg', value: 'PR1260002501530' },
           ].map((stat, i) => (
             <div key={i} className="glass-panel p-6 rounded-2xl text-center border border-white/10">
-              <p className="text-3xl md:text-4xl font-serif text-[var(--color-luxury-gold)]">{stat.value}</p>
+              <p className="text-2xl md:text-3xl font-serif text-[var(--color-luxury-gold)]">{stat.value}</p>
               <p className="text-white/50 text-xs uppercase tracking-widest mt-2">{stat.label}</p>
             </div>
           ))}
@@ -176,12 +206,12 @@ export default function NriLandingPage({ params }: { params: { market: string } 
           <h2 className="text-3xl font-serif text-[var(--color-luxury-pearl)] mb-4">Ready to Invest from {market.city}?</h2>
           <p className="text-white/60 mb-8">Our dedicated NRI desk is available across time zones. Let us guide your investment journey.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+911234567890" className="px-10 py-4 bg-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">
-              Call NRI Desk
+            <a href="tel:+917744009295" className="px-10 py-4 bg-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">
+              Call NRI Desk (+91 77440 09295)
             </a>
-            <Link href="/" className="px-10 py-4 border border-white/30 text-white font-bold uppercase tracking-widest text-sm hover:border-[var(--color-luxury-gold)] hover:text-[var(--color-luxury-gold)] transition-colors">
-              Explore Project
-            </Link>
+            <a href="https://wa.me/917744009295" target="_blank" rel="noopener noreferrer" className="px-10 py-4 border border-[#25D366] text-[#25D366] font-bold uppercase tracking-widest text-sm hover:bg-[#25D366] hover:text-white transition-colors">
+              WhatsApp Us
+            </a>
           </div>
         </div>
       </div>
