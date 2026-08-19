@@ -31,22 +31,44 @@ export const metadata: Metadata = {
     default: "K Raheja Vistas Mahalunge | Ultra-Luxury 2, 3 & 4 BHK Deck Homes in Pune",
     template: "%s | K Raheja Vistas Mahalunge"
   },
-  description: "Discover K Raheja Vistas Mahalunge — ultra-luxury 2, 3 & 4 BHK premium deck residences on 7.5 acres at Baner Annexe, Pune by K Raheja Corp. MahaRERA: PR1260002501530. Starting ₹1.10 Cr.",
-  keywords: ["K Raheja Vistas Mahalunge", "K Raheja Vistas price", "Luxury Apartments Baner", "Premium Deck Residences Pune", "2 BHK Baner Annexe", "3 BHK Mahalunge Pune", "4 BHK duplex Mahalunge", "Mahalunge Real Estate 2025", "invest in Pune real estate", "MahaRERA PR1260002501530"],
+  description: "Discover K Raheja Vistas Mahalunge — 7.5-acre ultra-luxury deck residences at Baner Annexe, Pune by K Raheja Corp. 2, 3 & 4 BHK starting ₹1.10 Cr. MahaRERA: PR1260002501530. Get official brochure & floor plans.",
+  keywords: [
+    "K Raheja Vistas Mahalunge",
+    "K Raheja Vistas price",
+    "K Raheja Vistas floor plan",
+    "flats in Mahalunge Pune",
+    "luxury apartments Baner Pune",
+    "2 BHK Baner Annexe",
+    "3 BHK luxury deck apartments Pune",
+    "4 BHK duplex Mahalunge",
+    "K Raheja Vistas vs Godrej Hillside",
+    "invest in Pune real estate from Dubai",
+    "MahaRERA PR1260002501530",
+    "K Raheja Corp Pune",
+    "luxury apartments Hinjewadi",
+    "deck residences West Pune",
+    "Pune real estate investment 2026"
+  ],
+  category: 'Real Estate',
+  creator: 'K Raheja Corp',
+  publisher: 'K Raheja Corp',
+  authors: [{ name: 'K Raheja Corp', url: 'https://www.krahejacorp.com' }],
+  applicationName: 'K Raheja Vistas Mahalunge',
   alternates: {
     canonical: '/',
     languages: {
       'en-IN': '/',
-      'en-US': '/', // US NRI target
-      'en-AE': '/', // Dubai/UAE NRI target
-      'en-GB': '/', // UK NRI target
-      'en-SG': '/', // Singapore NRI target
+      'en': '/',
+      'en-US': '/nri/pune-real-estate-investment-for-nri-usa',
+      'en-AE': '/nri/invest-in-pune-real-estate-from-dubai',
+      'en-GB': '/nri/luxury-homes-pune-for-nri-uk',
+      'en-SG': '/nri/best-nri-investment-pune-singapore',
       'x-default': '/',
     }
   },
   openGraph: {
-    title: "K Raheja Vistas Mahalunge",
-    description: "Ultra-luxury 2 & 3 BHK premium deck residences at Baner Annex.",
+    title: "K Raheja Vistas Mahalunge | Ultra-Luxury 2, 3 & 4 BHK Deck Homes in Pune",
+    description: "7.5-acre ultra-luxury deck residences at Baner Annexe, Pune by K Raheja Corp. Starting ₹1.10 Cr. MahaRERA: PR1260002501530.",
     url: DOMAIN,
     siteName: "K Raheja Vistas Mahalunge",
     images: [
@@ -54,7 +76,7 @@ export const metadata: Metadata = {
         url: "/assets/banner.jpg",
         width: 1200,
         height: 630,
-        alt: "K Raheja Vistas Mahalunge Hero",
+        alt: "K Raheja Vistas Mahalunge — Luxury Deck Residences Baner Annexe Pune",
       },
     ],
     locale: "en_IN",
@@ -62,12 +84,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K Raheja Vistas Mahalunge",
-    description: "Ultra-luxury 2 & 3 BHK premium deck residences at Baner Annex.",
+    title: "K Raheja Vistas Mahalunge | Ultra-Luxury 2, 3 & 4 BHK Deck Homes in Pune",
+    description: "Ultra-luxury 2, 3 & 4 BHK deck residences at Baner Annexe, Pune by K Raheja Corp. MahaRERA: PR1260002501530.",
     images: ["/assets/banner.jpg"],
   },
   verification: {
-    google: "YOUR_GSC_VERIFICATION_STRING",
+    google: "U4zCae0__dM1wPXQMTDzwTTofHld4Y0kkiJqZ0uOC1c",
+    yandex: "yandex-verification-token",
+    yahoo: "yahoo-verification-token",
+    other: {
+      'msvalidate.01': 'BING_VERIFICATION_TOKEN',
+      'baidu-site-verification': 'BAIDU_TOKEN',
+    }
   },
   robots: {
     index: true,
@@ -82,12 +110,23 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  category: 'real estate',
+  other: {
+    'geo.region': 'IN-MH',
+    'geo.placename': 'Pune',
+    'geo.position': '18.563551;73.7339978',
+    'ICBM': '18.563551, 73.7339978',
+    'rating': 'General',
+    'distribution': 'Global',
+    'coverage': 'Worldwide',
+    'target': 'all',
+    'revisit-after': '1 days',
+  }
 };
 
 export const viewport = {
   maximumScale: 5,
   userScalable: true,
+  themeColor: '#0f172a',
 };
 
 const jsonLd = {
@@ -98,12 +137,12 @@ const jsonLd = {
   "image": `${DOMAIN}/assets/logo.png`,
   "@id": DOMAIN,
   "url": DOMAIN,
-  "telephone": "+91-1234567890",
+  "telephone": "+91-7744009295",
   "contactPoint": [
     {
       "@type": "ContactPoint",
-      "telephone": "+91-1234567890",
-      "contactType": "customer service",
+      "telephone": "+91-7744009295",
+      "contactType": "sales",
       "areaServed": ["IN", "US", "AE", "GB", "SG"],
       "availableLanguage": ["English", "Hindi", "Marathi"]
     }
@@ -117,7 +156,12 @@ const jsonLd = {
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": `${DOMAIN}/configurations/2-bhk-luxury-apartments-mahalunge-pune`,
-      "itemOffered": { "@type": "Apartment", "name": "2 BHK Deck Apartment", "numberOfRooms": 2 }
+      "itemOffered": {
+        "@type": "Apartment",
+        "name": "2 BHK Deck Apartment",
+        "numberOfRooms": 2,
+        "floorSize": { "@type": "QuantitativeValue", "value": "780", "unitCode": "FTK" }
+      }
     },
     {
       "@type": "Offer",
@@ -127,7 +171,12 @@ const jsonLd = {
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": `${DOMAIN}/configurations/3-bhk-luxury-deck-apartments-mahalunge-pune`,
-      "itemOffered": { "@type": "Apartment", "name": "3 BHK Deck Residence", "numberOfRooms": 3 }
+      "itemOffered": {
+        "@type": "Apartment",
+        "name": "3 BHK Deck Residence",
+        "numberOfRooms": 3,
+        "floorSize": { "@type": "QuantitativeValue", "value": "1150", "unitCode": "FTK" }
+      }
     },
     {
       "@type": "Offer",
@@ -137,7 +186,12 @@ const jsonLd = {
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": `${DOMAIN}/configurations/4-bhk-luxury-homes-mahalunge-pune`,
-      "itemOffered": { "@type": "Apartment", "name": "4 BHK Deck Home", "numberOfRooms": 4 }
+      "itemOffered": {
+        "@type": "Apartment",
+        "name": "4 BHK Deck Home",
+        "numberOfRooms": 4,
+        "floorSize": { "@type": "QuantitativeValue", "value": "1650", "unitCode": "FTK" }
+      }
     },
     {
       "@type": "Offer",
@@ -147,7 +201,12 @@ const jsonLd = {
       "priceCurrency": "INR",
       "availability": "https://schema.org/LimitedAvailability",
       "url": `${DOMAIN}/configurations/duplex-penthouse-mahalunge-pune`,
-      "itemOffered": { "@type": "Apartment", "name": "Duplex Penthouse", "numberOfRooms": 5 }
+      "itemOffered": {
+        "@type": "Apartment",
+        "name": "Duplex Penthouse",
+        "numberOfRooms": 5,
+        "floorSize": { "@type": "QuantitativeValue", "value": "2400", "unitCode": "FTK" }
+      }
     }
   ],
   "foundingDate": "1956",
@@ -183,8 +242,8 @@ const jsonLd = {
   "parentOrganization": {
     "@type": "Organization",
     "name": "K Raheja Corp",
-    "url": "https://www.krahejacorpvistas.com",
-    "logo": "https://www.krahejacorpvistas.com/assets/logo.png",
+    "url": "https://www.krahejacorp.com",
+    "logo": `${DOMAIN}/assets/logo.png`,
     "description": "K Raheja Corp is a leading real estate developer in India, known for premium luxury and commercial developments with decades of proven expertise."
   },
   "author": {
@@ -209,6 +268,7 @@ const jsonLd = {
     "latitude": 18.563551,
     "longitude": 73.7339978
   },
+  "hasMap": "https://maps.app.goo.gl/Ej3VN8k7QdF2vRzw5",
   "areaServed": [
     { "@type": "City", "name": "Pune" },
     { "@type": "Place", "name": "Baner" },
@@ -233,6 +293,8 @@ const jsonLd = {
     "closes": "19:00"
   },
   "priceRange": "₹1.10 Cr - ₹2.5 Cr",
+  "currenciesAccepted": "INR, USD, AED, GBP, SGD",
+  "paymentAccepted": "Bank Transfer, Cheque, Wire Transfer",
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
@@ -321,6 +383,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
         <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* LCP Preload: Banner image is the Largest Contentful Paint element. Preloading it cuts LCP by ~200-400ms. */}
         <link rel="preload" as="image" href="/assets/banner.jpg" fetchPriority="high" />
         <link rel="alternate" type="application/rss+xml" title="K Raheja Vistas - Google Shopping & Merchant Feed" href="https://www.krahejacorpvistas.com/api/google-merchant-feed" />

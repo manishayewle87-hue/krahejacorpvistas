@@ -3,22 +3,10 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // ─── TIER 1: Revenue-generating search bots — full unrestricted access ───
+      // ─── TIER 1: Googlebot & Global Search Engine Crawlers — Full Unrestricted Access ───
       {
         userAgent: 'Googlebot',
-        allow: [
-          '/',
-          '/nri/',
-          '/compare/',
-          '/investment-calculator',
-          '/stories',
-          '/updates',
-          '/insights',
-          '/project/',
-          '/neighborhood',
-          '/directory',
-          '/localized/',
-        ],
+        allow: '/',
         disallow: [
           '/admin/',
           '/portal/',
@@ -30,6 +18,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Googlebot-Image',
         allow: [
+          '/',
           '/assets/',
           '/public/',
           '/_next/image',
@@ -38,16 +27,21 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Googlebot-Video',
-        allow: ['/assets/video.mp4', '/assets/video-thumb.jpg'],
+        allow: ['/', '/assets/video.mp4', '/assets/video-thumb.jpg'],
+      },
+      {
+        userAgent: 'Googlebot-News',
+        allow: ['/', '/insights', '/stories', '/updates'],
+        disallow: ['/admin/', '/portal/'],
       },
       {
         userAgent: 'AdsBot-Google',
-        allow: ['/campaign/'],
+        allow: ['/campaign/', '/'],
         disallow: ['/admin/', '/portal/', '/api/'],
       },
       {
         userAgent: 'AdsBot-Google-Mobile',
-        allow: ['/campaign/'],
+        allow: ['/campaign/', '/'],
         disallow: ['/admin/', '/portal/', '/api/'],
       },
       {
@@ -65,25 +59,39 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
       },
       {
-        userAgent: 'Slurp', // Yahoo
+        userAgent: 'Applebot',
+        allow: '/',
+        disallow: ['/admin/', '/portal/', '/api/'],
+      },
+      {
+        userAgent: 'Applebot-Extended',
+        allow: '/',
+        disallow: ['/admin/', '/portal/', '/api/'],
+      },
+      {
+        userAgent: 'Yandex',
         allow: '/',
         disallow: ['/admin/', '/portal/', '/api/', '/campaign/'],
-        crawlDelay: 5,
+        crawlDelay: 2,
       },
       {
         userAgent: 'DuckDuckBot',
         allow: '/',
         disallow: ['/admin/', '/portal/', '/api/', '/campaign/'],
-        crawlDelay: 2,
+      },
+      {
+        userAgent: 'Slurp', // Yahoo
+        allow: '/',
+        disallow: ['/admin/', '/portal/', '/api/', '/campaign/'],
+        crawlDelay: 3,
       },
 
-      // ─── TIER 2: AI training crawlers — explicitly denied (belt-and-suspenders with Edge WAF) ───
+      // ─── TIER 2: Unauthorized AI Dataset Harvesters — Explicit Denial ───
       { userAgent: 'GPTBot',          disallow: '/' },
       { userAgent: 'ChatGPT-User',    disallow: '/' },
       { userAgent: 'anthropic-ai',    disallow: '/' },
       { userAgent: 'ClaudeBot',       disallow: '/' },
       { userAgent: 'Claude-Web',      disallow: '/' },
-      { userAgent: 'PerplexityBot',   disallow: '/' },
       { userAgent: 'Google-Extended', disallow: '/' },
       { userAgent: 'cohere-ai',       disallow: '/' },
       { userAgent: 'CCBot',           disallow: '/' },
@@ -91,7 +99,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Bytespider',      disallow: '/' },
       { userAgent: 'Omgili',          disallow: '/' },
 
-      // ─── TIER 3: High-volume SEO tool bots — no proprietary content access ───
+      // ─── TIER 3: High-Volume SEO Scraper Tools — Disallow ───
       { userAgent: 'AhrefsBot',  disallow: '/' },
       { userAgent: 'SemrushBot', disallow: '/' },
       { userAgent: 'MJ12bot',    disallow: '/' },
@@ -100,24 +108,24 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'BLEXBot',    disallow: '/' },
       { userAgent: 'RogerBot',   disallow: '/' },
 
-      // ─── TIER 4: All other bots — crawl-budget-optimised rules ───
+      // ─── TIER 4: Default Wildcard Crawler Rules (Crawl-Budget Optimization) ───
       {
         userAgent: '*',
         allow: '/',
         disallow: [
-          // Admin & internal surfaces
+          // Admin & Private internal surfaces
           '/admin/',
           '/portal/',
           '/api/',
           '/campaign/',
           '/private/',
 
-          // Next.js internals — waste crawl budget
+          // Next.js internals
           '/_next/static/',
           '/_next/image',
           '/_next/webpack-hmr',
 
-          // URL parameter junk — causes duplicate content
+          // Query parameters causing duplicate content
           '/*?utm_*',
           '/*?fbclid=*',
           '/*?gclid=*',
@@ -130,13 +138,13 @@ export default function robots(): MetadataRoute.Robots {
           '/*?q=*',
           '/*&*',
 
-          // Raw data & file types that waste crawl budget
+          // Raw data files
           '/*.json',
           '/*.xml$',
           '/*.map',
           '/*.txt$',
 
-          // Malicious path patterns (defense in depth)
+          // Security paths (defense in depth)
           '/.env',
           '/.git/',
           '/wp-admin/',
