@@ -1,57 +1,49 @@
 'use server';
 
 import { z } from 'zod';
+import { submitLead as recordLead } from './leads';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().regex(/^\d{10}$/, 'Phone must be exactly 10 digits'),
-  configuration: z.enum(['2BHK', '3BHK', 'Duplex', 'Undecided']),
+  email: z.string().email('Invalid email address').or(z.literal('')).optional(),
+  phone: z.string().min(10, 'Phone must be at least 10 digits'),
+  configuration: z.string().optional().default('Undecided'),
   utmSource: z.string().optional(),
   utmMedium: z.string().optional(),
   utmCampaign: z.string().optional(),
 });
 
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function submitLead(prevState: unknown, formData: FormData) {
   try {
     const rawData = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      configuration: formData.get('configuration'),
-      utmSource: formData.get('utm_source'),
-      utmMedium: formData.get('utm_medium'),
-      utmCampaign: formData.get('utm_campaign'),
+      name: (formData.get('name') as string) || '',
+      email: (formData.get('email') as string) || '',
+      phone: (formData.get('phone') as string) || '',
+      configuration: (formData.get('configuration') as string) || 'Undecided',
+      utmSource: (formData.get('utm_source') as string) || undefined,
+      utmMedium: (formData.get('utm_medium') as string) || undefined,
+      utmCampaign: (formData.get('utm_campaign') as string) || undefined,
     };
 
     // Validate data using Zod
     const validatedData = formSchema.parse(rawData);
 
-    // Send email using Resend
-    await resend.emails.send({
-      from: 'Leads <onboarding@resend.dev>',
-      to: 'propsmartrealty@gmail.com',
-      subject: `New Lead: ${validatedData.name} - K Raheja Vistas Mahalunge`,
-      text: `
---- NEW ENQUIRY LEAD ---
-
-Name: ${validatedData.name}
-Phone: ${validatedData.phone}
-Email: ${validatedData.email}
-Configuration: ${validatedData.configuration}
-
---- ATTRIBUTION ---
-Source: ${validatedData.utmSource || 'Organic/Direct'}
-Medium: ${validatedData.utmMedium || 'N/A'}
-Campaign: ${validatedData.utmCampaign || 'N/A'}
-      `,
+    // Save lead to database, trigger email and CRM webhook
+    const result = await recordLead({
+      name: validatedData.name,
+      email: validatedData.email || 'not-provided@example.com',
+      phone: validatedData.phone,
+      configuration: validatedData.configuration || 'Undecided',
     });
 
-    return { success: true, message: 'Thank you for your interest. A luxury consultant will contact you shortly.' };
+    if (!result.success) {
+      return { success: false, message: result.error || 'Failed to submit lead.' };
+    }
+
+    return {
+      success: true,
+      message: 'Thank you for your interest. A luxury consultant will contact you shortly.',
+    };
   } catch (error) {
     if (error instanceof z.ZodError) {
       return { success: false, errors: error.flatten().fieldErrors };
