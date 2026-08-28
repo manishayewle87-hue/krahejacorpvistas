@@ -118,8 +118,8 @@ export async function sendSiteVisitEmail(lead: LeadEmailData) {
         clubhouse, and 7.5-acre masterplan.
       </p>
       <div style="text-align: center; margin: 30px 0;">
-        <a href="https://wa.me/919999999999?text=Hi, I would like to schedule a VIP site visit for K Raheja Vistas Mahalunge." style="display: inline-block; padding: 14px 36px; background: #25D366; color: white; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em;">
-          Book on WhatsApp
+        <a href="https://wa.me/917744009295?text=Hi, I would like to schedule a VIP site visit for K Raheja Vistas Mahalunge." style="display: inline-block; padding: 14px 36px; background: #25D366; color: white; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em;">
+          Book on WhatsApp (+91 77440 09295)
         </a>
       </div>
     </div>

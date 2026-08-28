@@ -29,7 +29,7 @@ function buildWhatsAppMessage(pathname: string): string {
 export default function WhatsAppButton() {
   const pathname = usePathname();
   const message = buildWhatsAppMessage(pathname);
-  const phone = '919999999999'; // Replace with actual WhatsApp Business number
+  const phone = '917744009295'; // Official WhatsApp Desk
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   return (
@@ -39,7 +39,7 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp with K Raheja Vistas Sales Team"
       title="WhatsApp Us"
-      className="fixed bottom-24 right-6 z-50 group flex items-center gap-3"
+      className="fixed bottom-24 right-6 z-50 group flex items-center gap-3 cursor-pointer"
     >
       {/* Tooltip label */}
       <span className="hidden md:block opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-lg shadow-lg whitespace-nowrap">
