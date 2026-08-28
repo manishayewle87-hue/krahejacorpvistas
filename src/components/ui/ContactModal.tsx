@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Loader2 } from 'lucide-react';
-// import { useFormState } from 'react-dom'; // Next.js 14+ (Not used directly here for simplicity with react-hook-form)
+import { X, Loader2, CheckCircle2, ShieldCheck, PhoneCall, Sparkles } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -12,48 +12,77 @@ import { submitLead } from '@/app/actions/submit-lead';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Invalid email address').or(z.literal('')).optional(),
   phone: z.string().regex(/^\d{10}$/, 'Phone must be exactly 10 digits'),
-  configuration: z.enum(['2BHK', '3BHK', 'Duplex', 'Undecided']),
+  configuration: z.enum(['2BHK', '3BHK', '4BHK', 'Duplex', 'Undecided']),
 });
 
-type FormData = z.infer<typeof formSchema>;
+type FormInput = {
+  name: string;
+  email?: string;
+  phone: string;
+  configuration: '2BHK' | '3BHK' | '4BHK' | 'Duplex' | 'Undecided';
+};
 
-export default function ContactModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [mounted, setMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormInput>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      configuration: 'Undecided'
-    }
+      name: '',
+      email: '',
+      phone: '',
+      configuration: 'Undecided',
+    },
   });
-
-  // Reset state when modal opens/closes
-  useEffect(() => {
-    if (!isOpen) {
-      setTimeout(() => {
-        reset();
-        setSubmitResult(null);
-        setIsSubmitting(false);
-      }, 500);
-    }
-  }, [isOpen, reset]);
 
   const searchParams = useSearchParams();
 
-  const onSubmit = async (data: FormData) => {
+  // Mount check for Portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll and handle Escape key when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      const timer = setTimeout(() => {
+        reset();
+        setSubmitResult(null);
+        setIsSubmitting(false);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, onClose, reset]);
+
+  const onSubmit = async (data: FormInput) => {
     setIsSubmitting(true);
     setSubmitResult(null);
-    
-    // Convert to FormData for the Server Action
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
 
-    // Capture and append UTM parameters
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('email', data.email || '');
+    formData.append('phone', data.phone);
+    formData.append('configuration', data.configuration);
+
     if (searchParams) {
       if (searchParams.get('utm_source')) formData.append('utm_source', searchParams.get('utm_source')!);
       if (searchParams.get('utm_medium')) formData.append('utm_medium', searchParams.get('utm_medium')!);
@@ -61,138 +90,194 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean, onC
     }
 
     const result = await submitLead(null, formData);
-    
     setIsSubmitting(false);
+
     if (result.success) {
-      setSubmitResult({ success: true, message: result.message || 'Success' });
+      setSubmitResult({
+        success: true,
+        message: result.message || 'Thank you for registering. Our luxury property advisor will connect with you shortly.',
+      });
     } else {
-      setSubmitResult({ success: false, message: result.message || 'Validation failed' });
+      setSubmitResult({
+        success: false,
+        message: result.message || 'Unable to submit enquiry. Please try again.',
+      });
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-[999999] flex justify-end items-stretch overflow-hidden">
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="fixed inset-0 z-[99990] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-0"
+            aria-hidden="true"
           />
+
+          {/* Sliding Drawer Container */}
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md z-[99999] bg-white shadow-2xl overflow-y-auto"
+            initial={{ x: '100%', opacity: 0.5 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 260 }}
+            className="relative z-10 w-full max-w-lg bg-[#141414] text-white border-l border-white/10 shadow-2xl flex flex-col h-full overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-headline"
           >
-            <div className="p-8">
-              <button 
+            {/* Modal Header */}
+            <div className="sticky top-0 z-20 bg-[#141414]/95 backdrop-blur-md px-8 py-6 border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-[var(--color-luxury-gold)]">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-xs uppercase tracking-[0.25em] font-semibold">Private Preview</span>
+              </div>
+              <button
                 onClick={onClose}
-                className="absolute top-6 right-6 text-gray-400 hover:text-[var(--color-luxury-charcoal)] transition-colors"
+                aria-label="Close modal"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[var(--color-luxury-gold)] text-white/70 hover:text-white flex items-center justify-center transition-all"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
-              
-              <div className="mt-12 mb-10">
-                <span className="text-[var(--color-luxury-gold)] tracking-[0.2em] uppercase text-xs font-semibold mb-3 block">
-                  Private Preview
-                </span>
-                <h2 className="text-3xl font-serif text-[var(--color-luxury-charcoal)] mb-4">
-                  Register Interest
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-8 md:p-10 flex-1">
+              <div className="mb-8">
+                <h2 id="modal-headline" className="text-3xl font-serif text-[var(--color-luxury-pearl)] mb-3 leading-tight font-normal">
+                  Experience K Raheja Vistas
                 </h2>
-                <p className="text-gray-500 font-light text-sm">
-                  Leave your details below and our luxury property consultant will get in touch with you shortly.
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Register your interest for priority floor plan previews, pricing sheets, and curated VIP site visits at Baner Annexe, Mahalunge.
                 </p>
               </div>
 
               {submitResult?.success ? (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-[var(--color-luxury-sand)] p-6 rounded-lg text-center border border-[var(--color-luxury-gold)]/30"
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="bg-white/5 border border-[var(--color-luxury-gold)]/40 p-8 rounded-2xl text-center backdrop-blur-sm"
                 >
-                  <h3 className="text-[var(--color-luxury-gold)] font-serif text-xl mb-2">Thank You</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{submitResult.message}</p>
-                  <button 
+                  <div className="w-14 h-14 bg-[var(--color-luxury-gold)]/20 text-[var(--color-luxury-gold)] rounded-full flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-serif text-[var(--color-luxury-pearl)] mb-3">Enquiry Received</h3>
+                  <p className="text-white/70 text-sm leading-relaxed mb-6">
+                    {submitResult.message}
+                  </p>
+                  <div className="bg-white/5 p-4 rounded-xl text-xs text-white/60 mb-6 flex items-center justify-center gap-2">
+                    <PhoneCall className="w-4 h-4 text-[var(--color-luxury-gold)]" />
+                    <span>Direct Desk: +91 77440 09295</span>
+                  </div>
+                  <button
                     onClick={onClose}
-                    className="mt-6 px-6 py-2 bg-[var(--color-luxury-charcoal)] text-white text-sm tracking-wider uppercase font-medium hover:bg-[var(--color-luxury-gold)] transition-colors w-full"
+                    className="w-full py-4 bg-[var(--color-luxury-gold)] text-[#141414] text-xs uppercase tracking-[0.2em] font-bold rounded-lg hover:bg-white transition-all shadow-lg"
                   >
-                    Close
+                    Back to Project
                   </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2 font-medium">Full Name</label>
-                    <input 
-                      {...register('name')} 
-                      className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[var(--color-luxury-gold)] transition-colors text-[var(--color-luxury-charcoal)] placeholder-gray-300"
-                      placeholder="e.g. Anand Mahindra"
+                    <label className="block text-xs uppercase tracking-wider text-white/70 mb-2 font-medium">
+                      Full Name <span className="text-[var(--color-luxury-gold)]">*</span>
+                    </label>
+                    <input
+                      {...register('name')}
+                      type="text"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[var(--color-luxury-gold)] rounded-lg px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-all text-sm"
+                      placeholder="e.g. Rahul Sharma"
                     />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+                    {errors.name && <p className="text-red-400 text-xs mt-1.5">{errors.name.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2 font-medium">Email Address</label>
-                    <input 
-                      {...register('email')} 
-                      type="email"
-                      className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[var(--color-luxury-gold)] transition-colors text-[var(--color-luxury-charcoal)] placeholder-gray-300"
-                      placeholder="anand@example.com"
-                    />
-                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2 font-medium">Phone Number</label>
+                    <label className="block text-xs uppercase tracking-wider text-white/70 mb-2 font-medium">
+                      Phone Number <span className="text-[var(--color-luxury-gold)]">*</span>
+                    </label>
                     <div className="flex gap-2">
-                      <span className="border-b border-gray-300 py-2 text-gray-500">+91</span>
-                      <input 
-                        {...register('phone')} 
-                        className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[var(--color-luxury-gold)] transition-colors text-[var(--color-luxury-charcoal)] placeholder-gray-300"
+                      <span className="bg-white/5 border border-white/15 rounded-lg px-3.5 py-3.5 text-white/70 text-sm flex items-center font-medium">
+                        +91
+                      </span>
+                      <input
+                        {...register('phone')}
+                        type="tel"
+                        maxLength={10}
+                        className="flex-1 bg-white/5 border border-white/15 focus:border-[var(--color-luxury-gold)] rounded-lg px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-all text-sm"
                         placeholder="9876543210"
                       />
                     </div>
-                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                    {errors.phone && <p className="text-red-400 text-xs mt-1.5">{errors.phone.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2 font-medium">Interested Configuration</label>
-                    <select 
+                    <label className="block text-xs uppercase tracking-wider text-white/70 mb-2 font-medium">
+                      Email Address (Optional)
+                    </label>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[var(--color-luxury-gold)] rounded-lg px-4 py-3.5 text-white placeholder-white/30 focus:outline-none transition-all text-sm"
+                      placeholder="rahul@example.com"
+                    />
+                    {errors.email && <p className="text-red-400 text-xs mt-1.5">{errors.email.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-white/70 mb-2 font-medium">
+                      Preferred Configuration
+                    </label>
+                    <select
                       {...register('configuration')}
-                      className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[var(--color-luxury-gold)] transition-colors text-[var(--color-luxury-charcoal)] bg-transparent"
+                      className="w-full bg-[#1b1b1b] border border-white/15 focus:border-[var(--color-luxury-gold)] rounded-lg px-4 py-3.5 text-white focus:outline-none transition-all text-sm"
                     >
-                      <option value="Undecided">Undecided / Exploring</option>
-                      <option value="2BHK">2 BHK Premium Deck</option>
-                      <option value="3BHK">3 BHK Ultra-Luxury</option>
-                      <option value="Duplex">Penthouse Duplex</option>
+                      <option value="Undecided">Undecided / Exploring Options</option>
+                      <option value="2BHK">2 BHK Premium Deck Residence (780 sq.ft.)</option>
+                      <option value="3BHK">3 BHK Ultra-Luxury Residence (1,150 sq.ft.)</option>
+                      <option value="4BHK">4 BHK Palatial Residence (1,650 sq.ft.)</option>
+                      <option value="Duplex">Signature Sky Penthouse / Duplex (2,400+ sq.ft.)</option>
                     </select>
                   </div>
 
                   {submitResult?.success === false && (
-                    <p className="text-red-500 text-sm mt-4">{submitResult.message}</p>
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-xs">
+                      {submitResult.message}
+                    </div>
                   )}
 
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 mt-8 bg-[var(--color-luxury-gold)] text-white tracking-widest uppercase font-semibold text-sm hover:bg-[var(--color-luxury-charcoal)] transition-colors disabled:opacity-70 flex justify-center items-center gap-2"
+                    className="w-full py-4 bg-[var(--color-luxury-gold)] text-[#141414] uppercase tracking-[0.2em] font-bold text-sm rounded-lg hover:bg-white transition-all disabled:opacity-60 flex justify-center items-center gap-2 shadow-xl cursor-pointer"
                   >
-                    {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                    {isSubmitting ? 'Submitting...' : 'Request Callback'}
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Processing...</span>
+                      </>
+                    ) : (
+                      <span>Request Instant Callback</span>
+                    )}
                   </button>
-                  <p className="text-[10px] text-gray-400 text-center mt-4 uppercase tracking-wider">
-                    Your details are securely encrypted. No spam.
-                  </p>
+
+                  <div className="pt-4 flex items-center justify-center gap-2 text-white/40 text-[11px]">
+                    <ShieldCheck className="w-4 h-4 text-[var(--color-luxury-gold)]" />
+                    <span>MahaRERA PR1260002501530 • 100% Privacy Guaranteed</span>
+                  </div>
                 </form>
               )}
             </div>
           </motion.div>
-        </>
+        </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
