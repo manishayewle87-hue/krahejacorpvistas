@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import ContactModal from '@/components/ui/ContactModal';
 
 export default function EmiCalculator() {
   const [propertyValue, setPropertyValue] = useState(15000000); // 1.5 Cr
   const [downPaymentPercent, setDownPaymentPercent] = useState(20);
   const [interestRate, setInterestRate] = useState(8.5);
   const [tenureYears, setTenureYears] = useState(20);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+
   const principal = propertyValue - (propertyValue * (downPaymentPercent / 100));
   const r = (interestRate / 12) / 100;
   const n = tenureYears * 12;
@@ -131,12 +134,17 @@ export default function EmiCalculator() {
               </div>
             </div>
             
-            <button className="w-full mt-10 py-4 bg-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] tracking-widest uppercase font-semibold text-sm hover:bg-white transition-colors">
+            <button 
+              onClick={() => setContactModalOpen(true)}
+              className="w-full mt-10 py-4 bg-[var(--color-luxury-gold)] text-[#141414] tracking-widest uppercase font-bold text-sm hover:bg-white transition-all rounded shadow-xl cursor-pointer"
+            >
               Apply For Pre-Approval
             </button>
           </div>
         </motion.div>
       </div>
+
+      <ContactModal isOpen={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </div>
   );
 }

@@ -52,9 +52,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export function generateStaticParams() {
   const allKeys = Object.keys(db);
-  // Cap at 500 for build-time generation to prevent OOM errors. 
-  // Remaining 9500+ pages will render On-Demand (ISR).
-  const buildTimeKeys = allKeys.slice(0, 500);
+  // Cap at 50 for instant, lightweight build-time generation. 
+  // Remaining pages render dynamically with ISR edge caching.
+  const buildTimeKeys = allKeys.slice(0, 50);
   
   return buildTimeKeys.map((slugKey) => ({
     slug: slugKey.split('/'),

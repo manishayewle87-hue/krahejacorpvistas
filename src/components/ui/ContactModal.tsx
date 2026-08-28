@@ -7,7 +7,6 @@ import { X, Loader2, CheckCircle2, ShieldCheck, PhoneCall, Sparkles } from 'luci
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSearchParams } from 'next/navigation';
 import { submitLead } from '@/app/actions/submit-lead';
 
 const formSchema = z.object({
@@ -38,8 +37,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
       configuration: 'Undecided',
     },
   });
-
-  const searchParams = useSearchParams();
 
   // Mount check for Portal
   useEffect(() => {
@@ -83,10 +80,11 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
     formData.append('phone', data.phone);
     formData.append('configuration', data.configuration);
 
-    if (searchParams) {
-      if (searchParams.get('utm_source')) formData.append('utm_source', searchParams.get('utm_source')!);
-      if (searchParams.get('utm_medium')) formData.append('utm_medium', searchParams.get('utm_medium')!);
-      if (searchParams.get('utm_campaign')) formData.append('utm_campaign', searchParams.get('utm_campaign')!);
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('utm_source')) formData.append('utm_source', params.get('utm_source')!);
+      if (params.get('utm_medium')) formData.append('utm_medium', params.get('utm_medium')!);
+      if (params.get('utm_campaign')) formData.append('utm_campaign', params.get('utm_campaign')!);
     }
 
     const result = await submitLead(null, formData);
@@ -110,7 +108,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[999999] flex justify-end items-stretch overflow-hidden">
+        <div className="fixed inset-0 z-[999999] flex justify-end items-stretch overflow-hidden" style={{ zIndex: 999999 }}>
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -118,7 +116,8 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-0"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            style={{ zIndex: 999998 }}
             aria-hidden="true"
           />
 
@@ -128,7 +127,8 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '100%', opacity: 0 }}
             transition={{ type: 'spring', damping: 28, stiffness: 260 }}
-            className="relative z-10 w-full max-w-lg bg-[#141414] text-white border-l border-white/10 shadow-2xl flex flex-col h-full overflow-y-auto"
+            className="relative w-full max-w-lg bg-[#141414] text-white border-l border-white/10 shadow-2xl flex flex-col h-full max-h-screen overflow-y-auto"
+            style={{ zIndex: 999999 }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
@@ -142,7 +142,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
               <button
                 onClick={onClose}
                 aria-label="Close modal"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[var(--color-luxury-gold)] text-white/70 hover:text-white flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[var(--color-luxury-gold)] text-white/70 hover:text-white flex items-center justify-center transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -178,7 +178,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                   </div>
                   <button
                     onClick={onClose}
-                    className="w-full py-4 bg-[var(--color-luxury-gold)] text-[#141414] text-xs uppercase tracking-[0.2em] font-bold rounded-lg hover:bg-white transition-all shadow-lg"
+                    className="w-full py-4 bg-[var(--color-luxury-gold)] text-[#141414] text-xs uppercase tracking-[0.2em] font-bold rounded-lg hover:bg-white transition-all shadow-lg cursor-pointer"
                   >
                     Back to Project
                   </button>

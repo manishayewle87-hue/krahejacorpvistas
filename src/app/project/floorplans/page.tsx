@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EmiCalculator from '@/components/ui/EmiCalculator';
+import ContactModal from '@/components/ui/ContactModal';
 import Image from 'next/image';
 
 const floorPlans = [
@@ -111,8 +112,8 @@ export default function FloorPlansPage() {
     { label: "Luxury Floor Plans", href: "/project/floorplans" }
   ];
 
-
   const [activeFilter, setActiveFilter] = useState('all');
+  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   const filteredPlans = floorPlans.filter(plan => activeFilter === 'all' || plan.type === activeFilter);
 
@@ -175,7 +176,7 @@ export default function FloorPlansPage() {
 
         {/* Layout Grid */}
         <div className="container mx-auto">
-        <Breadcrumbs items={breadcrumbs} />
+          <Breadcrumbs items={breadcrumbs} />
 
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <AnimatePresence>
@@ -187,7 +188,7 @@ export default function FloorPlansPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden text-left border border-gray-100 group"
+                  className="bg-white rounded-2xl shadow-xl overflow-hidden text-left border border-gray-100 group flex flex-col justify-between"
                 >
                   <div className="h-64 bg-gray-100 overflow-hidden relative">
                     <Image 
@@ -197,12 +198,17 @@ export default function FloorPlansPage() {
                       className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 mix-blend-multiply" 
                     />
                   </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-serif text-[var(--color-luxury-charcoal)] mb-2">{plan.name}</h3>
-                    <p className="text-[var(--color-luxury-gold)] font-semibold text-sm tracking-widest uppercase mb-4">{plan.carpet}</p>
-                    <p className="text-gray-600 leading-relaxed mb-8">{plan.desc}</p>
-                    <button className="w-full py-3 border border-[var(--color-luxury-gold)] text-[var(--color-luxury-charcoal)] hover:bg-[var(--color-luxury-gold)] hover:text-white transition-colors uppercase text-xs font-bold tracking-widest">
-                      Request Pricing
+                  <div className="p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-2xl font-serif text-[var(--color-luxury-charcoal)] mb-2">{plan.name}</h3>
+                      <p className="text-[var(--color-luxury-gold)] font-semibold text-sm tracking-widest uppercase mb-4">{plan.carpet}</p>
+                      <p className="text-gray-600 leading-relaxed mb-8">{plan.desc}</p>
+                    </div>
+                    <button 
+                      onClick={() => setContactModalOpen(true)}
+                      className="w-full py-3.5 border border-[var(--color-luxury-gold)] bg-[var(--color-luxury-gold)] text-[#141414] hover:bg-[#141414] hover:text-white transition-all uppercase text-xs font-bold tracking-widest rounded shadow-md cursor-pointer"
+                    >
+                      Request Pricing &amp; Availability
                     </button>
                   </div>
                 </motion.div>
@@ -214,6 +220,8 @@ export default function FloorPlansPage() {
 
       {/* EMI Calculator Widget */}
       <EmiCalculator />
+
+      <ContactModal isOpen={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </div>
   );
 }

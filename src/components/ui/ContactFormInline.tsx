@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSearchParams } from 'next/navigation';
 import { submitLead } from '@/app/actions/submit-lead';
 import { Loader2, CheckCircle2, ShieldCheck, PhoneCall } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -26,7 +25,6 @@ type FormInput = {
 export default function ContactFormInline() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null);
-  const searchParams = useSearchParams();
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormInput>({
     resolver: zodResolver(formSchema),
@@ -48,10 +46,11 @@ export default function ContactFormInline() {
     formData.append('phone', data.phone);
     formData.append('configuration', data.configuration);
 
-    if (searchParams) {
-      if (searchParams.get('utm_source')) formData.append('utm_source', searchParams.get('utm_source')!);
-      if (searchParams.get('utm_medium')) formData.append('utm_medium', searchParams.get('utm_medium')!);
-      if (searchParams.get('utm_campaign')) formData.append('utm_campaign', searchParams.get('utm_campaign')!);
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('utm_source')) formData.append('utm_source', params.get('utm_source')!);
+      if (params.get('utm_medium')) formData.append('utm_medium', params.get('utm_medium')!);
+      if (params.get('utm_campaign')) formData.append('utm_campaign', params.get('utm_campaign')!);
     }
 
     const result = await submitLead(null, formData);
